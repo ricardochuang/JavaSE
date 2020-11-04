@@ -1,0 +1,22 @@
+\t  =>空格
+\n =>换行
+\\ =>\符号
+\' =>'符号
+
+
+import java.util.Scanner;
+
+public class BooleanTest{
+  static Scanner in = new Scanner(system.in);
+  public static void main(string []args) {
+      int num = 0;
+      boolean bool;
+      System.out.println("Type 0 if you finish your hw, 1 for don't");
+      num = in.nextInt();
+      if( num == 0) boolean = ture;
+      else boolean = false;
+  }
+}
+
+DataTypeConvert
+int num = (int)0.0
