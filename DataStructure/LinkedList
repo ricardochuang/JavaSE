@@ -57,3 +57,19 @@ while(cur != null){
   reversedHead.next = cur;
   cur = nextCur;
 }
+
+
+//逆序打印链表
+//由于直接用上述的reverse方法会破坏链表，所以考虑用栈来反向
+public static void reversePrint(HeroNode head){
+  if(head.next == null) return;
+  Stack<HeroNode> stack = new Stack<HeroNode>();
+  HeroNode cur = head.next;
+  while(cur != null){
+    stack.push(cur);
+    cur = cur.next;
+   }
+   while(stack.sixe() > 0){
+    System.out.print(stack.pop());
+   }
+}
