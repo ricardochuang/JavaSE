@@ -1,0 +1,50 @@
+//添加到末尾
+public void add(HeroNode heroNode){
+  HeroNode temp = head;
+  while(true){
+    if(temp.next == null) break;
+    temp = temp.next;
+  }
+  temp.next = heroNode;
+}
+
+
+//按顺序添加
+public addByOrder(HeroNode heroNode){
+  HeroNode temp = head;
+  boolean flag = false; //看一下是否存在改编号的hero
+  while(true){
+    if(temp.next == null) break;
+    if(temp.next.no == hearNode.no){ //一定是找到要添加位置的前一个位置，因为单向的linked list不能往回走
+      flag = ture;
+      break;
+   }
+   if(temp.next.no > heroNode.no) break; //说明找到了前一个位置
+   temp = temp.next;
+  }
+  
+  if(flag) System.out.printol("Cannot add")
+  else{
+    heroNode.next = temp.next;
+    temp.next = heroNode;
+  }
+}
+
+
+//删除节点
+public void del(int no){
+  HeroNode temp = head;
+  boolean flag = false;
+  while(true){
+    if(temp.next == null) break;
+    if(temp.next.no == no){
+      flag == true;
+      break;
+    }
+    
+    temp = temp.next;
+  }
+  
+  if(flag) temp.next = temp.next.next;
+  else System.out.print("Cannot delete")
+}
