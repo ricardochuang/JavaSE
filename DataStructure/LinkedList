@@ -48,3 +48,12 @@ public void del(int no){
   if(flag) temp.next = temp.next.next;
   else System.out.print("Cannot delete")
 }
+
+
+//列表reverse
+while(cur != null){
+  nextCur = cur.next;
+  cur.next = reversedHead.next;
+  reversedHead.next = cur;
+  cur = nextCur;
+}
