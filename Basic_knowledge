@@ -31,3 +31,5 @@ private修饰的属性只可以在本类中访问
 
 static修饰的属性是类属性，属于类的特征，其值被所有属于此类的对象共享
 static属性规范使用类名进行访问
+Student.feature
+student.feature //不提倡
