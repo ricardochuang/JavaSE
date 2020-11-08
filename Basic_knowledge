@@ -71,3 +71,31 @@ public class Test{
   }
 
 }
+
+
+
+//使用方法例子
+
+public class Dog{
+  private String color;
+  public Dog(String c){color = c};//构造器。可以创建新的对象，并通过带参数的构造器进行初始化。
+  public viod setColor(String c){ this.color =  c;} //使用公共的set方法实现对私有属性进行设置值
+  public String getColor(){return this.color;}//使用公共的get方法实现对私有属性的获取
+
+} 
+public class DataManger{
+    public void changeColor(Dog dog){
+        dog.setColor("Black");
+    }
+}
+
+public class TestDog{
+    public static void main(String[] args){
+        Dog dog = new Dog("Brown");
+        
+        System.out.println(dog.getColor()); //此时未改变颜色，为棕色
+        dog.changeColor(dog);
+        System.out.println(dog.getColor()); //此时未改变颜色，为黑色
+    }
+
+}
