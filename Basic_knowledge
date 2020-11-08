@@ -20,3 +20,6 @@ public class BooleanTest{
 
 DataTypeConvert
 int num = (int)0.0
+
+
+char[] 的默认为“ ” 
