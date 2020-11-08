@@ -74,7 +74,7 @@ public class Test{
 
 
 
-//使用方法例子
+//使用实例方法例子
 
 public class Dog{
   private String color;
@@ -98,4 +98,26 @@ public class TestDog{
         System.out.println(dog.getColor()); //此时未改变颜色，为黑色
     }
 
+}
+
+
+//使用静态方法
+public class AreaProvider{
+    private int n;
+    
+    public static double countArea(double h, double d){ 
+    System.out.print(n); //错误，静态方法（类方法）不允许访问实例属性，不能访问实例方法，不能使用this关键字
+    int n = 0;
+    System.out.print(n); //正确，方法之内声明的变量不属于成员实例属性
+    return h * d;
+    
+    }
+}
+
+public class TestStaticMethod{
+    AreaProvider.countArea(34.5, 123.78);
+    
+    AreaProvider area1 = new AreaProvider();
+    area1 = countArea(23, 24); // 不推荐，一般不适用实例访问静态方法
+    
 }
