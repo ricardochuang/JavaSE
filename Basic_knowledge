@@ -56,4 +56,18 @@ public class Employee{
 
   }
   
+  public void intro(){//method
+    System.out.println("I'm " + name);
+  
+  }
+  
+}
+
+
+public class Test{
+  public static void main(String[] args){
+    Employee e1 = new Employee("张三");
+    e1.intro();
+  }
+
 }
