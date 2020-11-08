@@ -33,3 +33,27 @@ static修饰的属性是类属性，属于类的特征，其值被所有属于�
 static属性规范使用类名进行访问
 Student.feature
 student.feature //不提倡
+
+
+构造方法的第一作用是用来创建对象
+使用带参数的构造器实现在创建对象时对其进行初始化（为成员属性赋值）
+this关键字在构造器及实例方法，代表指向当前对象（当局部变量和成员变量名称相同时必须用this）
+public class Employee{
+
+  private Sring name;
+  private int age;
+  
+  public Employee(String name){ //构造器
+    this.name = name;
+  }
+  
+  public Employee(String name, int age){ 
+    this.name = name;
+    this.age = age;
+  }
+  
+  public Employee(){ //公共无参构造器
+
+  }
+  
+}
