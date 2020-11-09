@@ -271,10 +271,30 @@ public abstract interface Computer{
     //接口中值允许定义public的抽象方法，可以省略public和abstract
 }
 
+//接口的继承
+public interface Clock extends Computer{
+    void showSystemDateTime();//在子接口中添加了新的抽象定义
+}
+
+
 public class Mulity implements Computer{
     @Override
-    public doulbe count(count a, count b){
+    public double count(count a, count b){
         return a * b; 
+    }
+    
+    @Override
+    public void showSystemDateTime(){
+    System.out.print("Time");
+    /**
+        while(true){
+            Date time = new Date();
+            String timeString = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(time);
+            try{Thread.sleep(1000);}
+            catch(InterrutedException e){e.printStackTrace();}
+            */
+            
+        }
     }
 
 }
@@ -283,6 +303,11 @@ public TestInterface{
   //Computer computer = new Computer(); //错误。接口自身不能实例化
   Computer computer = new Mulity();//需要借助非抽象的上转型实例化。
   double res = computer.count(2, 3);
+  computer.showSystemDateTime();
   System.out.println(res); //6
 
 }
+
+
+
+
