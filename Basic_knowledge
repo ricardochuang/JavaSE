@@ -137,3 +137,76 @@ public class AreaProvider{
     return Math.pi*r*r;
     }
 }
+
+//继承
+final不能被继承
+
+
+//创建一个父类computer
+public class Computer{
+  private Sting name;
+
+  public double count(double a, double b){return a + b;}
+  
+  public Computer(){}
+  
+  public Computer(String name){this.name = name;}//当创建了一个有参构造器时，默认的无参构造器会被覆盖
+  
+  public String getName(){return name;}//通过public的get方法得到private的name
+  
+  private void show(){System.out.println("I'm " + name);}
+  
+}
+
+
+//创建第一个子类Watch
+public class Watch extends Computer{
+
+   public Watch(String name){
+    //System.out.println(name); // 报错。没有执行super时子类构造还没有调用父类构造器，因此子类构造器还没有产生
+    super(name); //子类中的构造器super关键字永远是调用父类中的构造器，从而创建父类构造器
+    System.out.println(name); //正确。super关键字必须位于子类构造器的第一行
+   }
+   
+   public void displayTime(){
+      System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
+   }
+}
+
+//创建一个子类MobilePhone
+public class MobilePhone extends Computer{
+   public void message(String content){
+      System.out.println("内容： " + content);
+   }
+
+}
+
+
+//对于Wacth的测试
+public class Test{
+  public static void main(String[] args){
+      watch.displayTime();
+      watch.count(1.1, 2.2); // 3.3
+      Watch watch = new watch(“字节”);
+      System.out.println(watch.getName()); //字节
+  }
+
+}
+
+
+//对于MobilePhone的测试
+public class Test2{
+  public static void main(String[] args){
+      Computer computer = new MobilePhone(); //上转型对象（实例是子类的，类型是父类的）
+      System.out.println(computer.count(23, 45);) //68 上转型对象可以直接调用父类中的方法
+      computer.message("Hello"); //报错。因为上转型对象不能访问子类中新添加的属性和方法
+      ((MobilePhone)computer).message("Hello");//正确。上转型对象可以强制转换为实际的子类类型
+      
+      MobilePhone mp = new MobilePhone();
+      mp.messagee("Hello"); //正确
+      
+      mp.show();//错误。 show方法在父类中为private，子类无法继承。
+  }
+
+}
+
