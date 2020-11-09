@@ -258,3 +258,31 @@ public class TestAbstract{
         Animal animal2 = new Mammal();//错误
     }
 }
+
+
+
+
+//接口
+public abstract interface Computer{
+    public static final int MAX_NUM = Interger.MAX_VALUE;
+    //Java接口只允许定义公共的静态常量，可以省略public static final修饰符
+    
+    public abstract double count(double a, double b);
+    //接口中值允许定义public的抽象方法，可以省略public和abstract
+}
+
+public class Mulity implements Computer{
+    @Override
+    public doulbe count(count a, count b){
+        return a * b; 
+    }
+
+}
+
+public TestInterface{
+  //Computer computer = new Computer(); //错误。接口自身不能实例化
+  Computer computer = new Mulity();//需要借助非抽象的上转型实例化。
+  double res = computer.count(2, 3);
+  System.out.println(res); //6
+
+}
