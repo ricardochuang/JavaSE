@@ -156,6 +156,8 @@ public class Computer{
   
   private void show(){System.out.println("I'm " + name);}
   
+  public static void staticMethod() {System.out.println("This is stasic Method");}
+  
 }
 
 
@@ -171,6 +173,14 @@ public class Watch extends Computer{
    public void displayTime(){
       System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
    }
+   //重写
+   @override
+   public double count(double n, double m){//访问修饰符不得低于父类，返回类型，方法名，参数类型，参数数量不得改变。对于final类型的方法不能重写。
+      return n - m;
+   }
+   
+   //静态方法的覆盖
+   public static void staticMethod() {System.out.println("New stasic Method");}
 }
 
 //创建一个子类MobilePhone
@@ -189,6 +199,7 @@ public class Test{
       watch.count(1.1, 2.2); // 3.3
       Watch watch = new watch("字节");
       System.out.println(watch.getName()); //字节
+      Watch.staticMethod();//正确。静态方法可以通过类方法调用。如果子类中覆盖了父类的类方法，则调用子类的类方法
   }
 
 }
