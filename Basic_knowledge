@@ -226,3 +226,35 @@ public class Test2{
 
 }
 
+
+//抽象类，一种用于被继承的类
+//抽象父类 Animal
+public abstract class Animal{//抽象类中也可以包含非抽象方法
+  public abstract void run(); //抽象方法，可以用public和protect，但是不能用private，因为private不能被子类调用。
+  // 注意： 不能使用final，static。抽象类不能实例化。
+}
+
+
+//普通子类Lion
+public class Lion extends Animal{//用普通类继承抽象类时，必须对抽象类的所有方法提供实现
+    @override
+    public void run(){
+      System.out.println("This is a lion");
+   } 
+}
+
+
+//抽象子类 Mammal
+public abstract Mammal extends Animal{//抽象子类可以不实现父类中的抽象方法，也可以对抽象方法进行实现
+    public abstract void lactation();//在抽象子类中可以继续添加新的抽象方法，也可以添加非抽象方法
+
+}
+
+//测试
+public class TestAbstract{
+    public static void main(Spring[] args){
+        Animal animal = new Animal(); //错误。抽象类自身不能实例化
+        Animal animal2 = new Lion();//正确。抽象类的实例化属于上转型对象。
+        Animal animal2 = new Mammal();//错误
+    }
+}
