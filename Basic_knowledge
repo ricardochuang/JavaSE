@@ -176,11 +176,16 @@ public class Watch extends Computer{
    //重写
    @override
    public double count(double n, double m){//访问修饰符不得低于父类，返回类型，方法名，参数类型，参数数量不得改变。对于final类型的方法不能重写。
-      return n - m;
+      double res = supper.count(n, m);//加上了super关键字，则访问父类的count。否则会访问子类的count，从而导致死循环。
+      return (n - m)/res; //最终结果是(n - m)/(n + m);
    }
    
    //静态方法的覆盖
-   public static void staticMethod() {System.out.println("New stasic Method");}
+   public static void staticMethod() {
+      super.staticMethod();//报错，super不允许出现在static中
+      Computer.staticMethod();//正确。子类的静态方法中使用父类类名，可以访问父类资源。
+      System.out.println("New stasic Method");
+   }
 }
 
 //创建一个子类MobilePhone
