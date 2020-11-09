@@ -165,11 +165,11 @@ public class Watch extends Computer{
    public Watch(String name){
     //System.out.println(name); // 报错。没有执行super时子类构造还没有调用父类构造器，因此子类构造器还没有产生
     super(name); //子类中的构造器super关键字永远是调用父类中的构造器，从而创建父类构造器
-    System.out.println(name); //正确。super关键字必须位于子类构造器的第一行
+    //System.out.println(name); //正确。super关键字必须位于子类构造器的第一行
    }
    
    public void displayTime(){
-      System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(new Date()))
+      System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
    }
 }
 
@@ -187,7 +187,7 @@ public class Test{
   public static void main(String[] args){
       watch.displayTime();
       watch.count(1.1, 2.2); // 3.3
-      Watch watch = new watch(“字节”);
+      Watch watch = new watch("字节");
       System.out.println(watch.getName()); //字节
   }
 
