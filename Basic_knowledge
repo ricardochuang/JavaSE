@@ -311,3 +311,59 @@ public TestInterface{
 
 
 
+//内部类和局部类
+
+public interface Computer{
+  void useComputer(double a, double b);//接口一定是抽象类
+}
+
+public class NotebookComputer implements Computer{
+    @override//普通类使用接口，要对接口功能进行实现
+    public void useComputer(double num0, double num1){
+    
+        //Memory memory = null; //错误，内部类还未创建
+        class Memory{ //局部类不能加访问修饰符，不能加static
+            public void store(double a, double b){
+                System.out.print("These two numbers are in memory right now")
+            }
+        }
+        Memory memory = new Memory();  //正确，创建局部类对象
+        memery.store(num0, num1);
+        
+        
+        Hoard hoard = new NoteBookComputer.Hoard(); //创建了一个本地的静态内部类对象
+        hoard.displaySelf();//调用内部静态方法
+        //因为私有的静态类只能在本类中使用，所以强行把它写到了接口里
+    }
+    
+    public class Cpu{ //普通内部类
+        public void handleData(){
+          System.out.println("I'm handlind data!")
+        }
+    }
+    
+    private static class Hoard{//私有的静态内部类
+        public void displaySelf(){
+          System.out.print("This is hoard!")
+        }
+    }
+}
+
+//普通内部类的测试
+public class TestInnerClass{
+  public static void main(String[] args){
+    cpu = new Cpu(); //错误，要先调用外部类
+    NotebookComputer nc = new NotebookComputer();
+    cpu = nc.new Cpu();//正确，先调用了外部类，再调用内部类
+    
+    cpu = new New NotebookComputer().new Cpu();//正确。将上面两句合成一句
+    
+    cpu.handlData(); // I'm handlind data!
+    
+    //局部类的测试
+    nc.useComputer(1,2); //These two numbers are in memory right now  This is hoard!
+  }
+
+}
+
+
