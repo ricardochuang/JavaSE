@@ -367,6 +367,8 @@ public class TestInnerClass{
 }
 
 //匿名类
+
+//定义一个职员类，这个职员类可以利用接口进行工作
 public class Staff{
     public void useComputerWorking(Computer computer, double n, double m){
         computer.useComputer(n , m);
@@ -386,6 +388,15 @@ public class TestHiddenClass{
              System.out.print("计算结果是"+res);
           }//匿名类对象
         }, a, b);
+        
+        //如果不想使用匿名类，可以先对接口进行override，然后使用useComputerWorking来进行Staff的计算
+//        Computer computer = new Computer() {
+//            @Override
+//            public void useComputer(double a, double b) {
+//                
+//            }
+//        };
+//        mark.useComputerWorking(computer, a, b);
         
     }
 }
