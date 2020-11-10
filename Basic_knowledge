@@ -401,3 +401,62 @@ public class TestHiddenClass{
     }
 }
 
+
+
+//静态块
+
+public class Location{
+
+  public static final int EAST;
+  public static final int WEST;
+  public static final int SHOUTH;
+  public static final int NORTH;
+  
+  public double distance;
+  
+  
+  static{ //静态代码块，允许赋值和调用静态方法
+     EAST = 0;
+     WEST = 1;
+     SOUTH = 2;
+     NORTH = 3;
+     display();
+     displayDistance(distance); //错误。不能在静态块中引用非静态方法，不能访问非静态字块
+     
+     class B{} //静态中可以定义内部类
+     
+     interface B{}//错误，静态块中不许使用接口
+  }
+  
+  public static void display(){
+      System.out.println("您的当前默认位置是" + NORTH);
+  
+  }
+  
+  private void displayDistance(double distance){
+      
+  }
+  
+  public Location(double distance){
+    this.distance = distance;
+    System.out.println("调用构造器，创建对象");
+  }
+}
+
+
+public class TestSta1{
+    public static void main(String[] args){
+        int location = Location.SOUTH; //您的当前默认位置是3
+        int location = Location.EAST;//静态代码块和类的加载只会被加载一次
+    }
+
+}
+
+
+public class TestSta2{
+    public static void main(String[] args){
+        Location location = new Location(233.33); //您的当前默认位置是3  调用构造器，创建对象
+        //静态代码块在静态初始化后与调用构造器之前加载
+    }
+}
+
