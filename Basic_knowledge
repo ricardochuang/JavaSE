@@ -380,7 +380,7 @@ public class TestHiddenClass{
         double a = 1.0;
         double b = 2.0;
         mark.useComputerWorking(new Computer(){
-          @override
+          @Override
           public void useComputer(double a, double b){
              double res = a + b;
              System.out.print("计算结果是"+res);
