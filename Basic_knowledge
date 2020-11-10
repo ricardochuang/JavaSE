@@ -366,4 +366,27 @@ public class TestInnerClass{
 
 }
 
+//匿名类
+public class Staff{
+    public void useComputerWorking(Computer computer, double n, double m){
+        computer.useComputer(n , m);
+    }
+
+}
+
+public class TestHiddenClass{
+    public static void main(String[] args){
+        Staff mark = new Staff();
+        double a = 1.0;
+        double b = 2.0;
+        mark.useComputerWorking(new Computer(){
+          @override
+          public void useComputer(double a, double b){
+             double res = a + b;
+             System.out.print("计算结果是"+res);
+          }//匿名类对象
+        }, a, b);
+        
+    }
+}
 
