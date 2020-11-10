@@ -393,7 +393,7 @@ public class TestHiddenClass{
 //        Computer computer = new Computer() {
 //            @Override
 //            public void useComputer(double a, double b) {
-//                
+//                System.out.print("计算结果是" + (a + b));
 //            }
 //        };
 //        mark.useComputerWorking(computer, a, b);
