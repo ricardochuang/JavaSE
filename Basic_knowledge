@@ -2,7 +2,9 @@
 \n =>换行
 \\ =>\符号
 \' =>'符号
-
+ 
+ 
+ 字符串用"", char 用''
 
 import java.util.Scanner;
 
@@ -22,7 +24,7 @@ DataTypeConvert
 int num = (int)0.0
 
 
-char[] 的默认为“ ” 
+char[] 的默认为' '
 
 
 public修饰的属性可以被任何地方创建的对象直接访问
@@ -729,5 +731,26 @@ public class TestValueOfMethod{
         intObj.toString(2);//不提倡。在toString没有参数的时候，是由对象进行调用的（调用的函数没有static）
         Integer.toString(2);//有参数的时候，调用函数有static，是静态重载，应该用类进行调用
         Integer.toString(intObj， 2); //10011100.将intObj转为二进制
+    }
+}
+
+
+//Character包装类
+public class Test{
+    public static void main(String[] args){
+        Character charObj = new Character('A');
+        Character charObj2 = Character.valueOf('中'); //用静态方式创建
+        
+        CharacterManager.equal(Character.valueOf('A')， Character.valueOf('B')); //第二个大
+    }
+}
+
+//Character的实例方法：charValue(), compareTo(), toString()
+//compareTo()方法
+public static class CharacterManager{ //跟实例无关，只是一个函数就可以使用static
+    public String equal(Character ch0, Character ch1{
+        if(ch0.compareTo(ch1) == 0) return "相等";
+        else if(ch0.compareTo(ch1) == 1) return "第一个大";
+        else return "第二个大";
     }
 }
