@@ -483,3 +483,75 @@ public class Test{
     }
 
 }
+
+
+
+//toString()
+public class Users{
+    private String id;
+    private String name;
+    private int age;
+    
+    public String getId(){
+      return id;
+    }
+    public void setId(String id){
+      this.id = id;
+    }
+    public String getName(){
+      return name;
+    }
+    public void setName(String name){
+      this.name = name;
+    }
+    public void setAge(int Age){
+      this.age = age;
+    }
+    public int getAge(){
+      return age;
+    }
+    public Users(String id, Srting name, int age){
+      this.id = id;
+      this.name = name;
+      this.age = age;
+    }
+    public Users(){}
+    
+    @Override
+    public String toString(){
+      String begin = '{';
+      String end = '}';
+      
+      begin += "\"";
+      begin += "id";
+      begin += "\"";
+      begin += ":";
+      begin += this.getId();
+      begin += ",";
+      
+      begin += "\"";
+      begin += "name";
+      begin += "\"";
+      begin += ":";
+      begin += this.getName();
+      begin += ",";      
+      
+      begin += "\"";
+      begin += "age";
+      begin += "\"";
+      begin += ":";
+      begin += this.getAge();
+      begin += end; 
+      
+      return begin;
+
+    }
+
+}
+
+public class Test2{
+    public static void main(String[] args){
+        Users u = new Users("NO1", "Bob", 20);
+        System.out.println(u.toString()); //{"id":NO1, "name":Bob, "age":69}
+    }
+}
