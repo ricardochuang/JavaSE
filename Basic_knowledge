@@ -660,8 +660,20 @@ public class TestInteger{
         Integer intObj = new Integer(24);
         emp.setId(intObj);
         
-        Integer intObj2 = new Integer("24");//可以用int，也可以用string
+        Integer intObj2 = new Integer("25");//可以用int，也可以用string
         emp.setId(intObj2);
+        
+        //compareTo方法比较大小
+        emp.getId().compareTo(emp2.getId());           //-1, 因为emp小于emp2
+        emp2.getId().compareTo(emp.getId());           //1, 因为emp2大于emp
+        new Integer(100).compareTo(new Integer(100));  //0, 因为相等
         
     }
 }
+
+
+Integer.MAX_VALUE //2147483647
+Integer.MIN_VALUE //-2147483648
+Integer.BYTES    //4
+Integer.SIZE     //32
+
