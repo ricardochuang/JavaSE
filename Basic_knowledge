@@ -558,7 +558,7 @@ public class Test2{
 
 
 //equals
-public class Employee(){
+public class Employee implements Cloneable{ //为了克隆，必须使用cloneable接口
     private String id;
     private String name;
     public String getId(){
@@ -585,6 +585,12 @@ public class Employee(){
         Employee emp = (Employee)obj;
         return this.getId().equals(emp.getId()) ? true : false;
     }
+    //clone方法
+    @Override
+    public Employee clone throws CloneNotSupportedException{
+        System.out.println("开始克隆");
+        return (Employee)super.cione();
+    }
 }
 public class Test3 {
     public static void main(String[] args){
@@ -593,12 +599,41 @@ public class Test3 {
         emp0.equals(emp1); //true
     }
 }
-//getClass
+//getClass方法
 public class Test4 {
     public static void main(String[] args){
         Employee emp0 = new Employee("123", "Bob");
         Class empClass = emp.getClass(); 
         //使用class对象获取当前对象的类的完全限定名称
         empclass.getName(); //可以得到类名，比如com.szb.entity
+    }
+}
+
+//hashCode方法
+public class Test5 {
+    public static void main(String[] args){
+        Users u0 = new Users("NO12", "Jack", 40 );
+        Users u1 = new Users;
+        User u2 = u0;
+        u0.hashCode();
+        u1.hashCode();
+        u2.hashCode(); //u0和u2应该相同
+    }
+}
+
+//clone方法
+public class Test6 {
+    public static void main(String[] args){
+        Employee e1 = new Employee("1", "A");
+        try{
+             Employee cloneEmp = e1.clone();
+             System.out.println("当前对象与克隆对象是否相等" + (e1 == cloneEmp)); //false
+             System.out.println("当前对象属性" + e1.getId()+"/t"+e1.getName()); //1，A
+             System.out.println("克隆对象属性" + cloneEmp.getId()+"/t"+cloneEmp.getName()); //1，A
+        }catch(CloneNotSupportedException e){
+            e.printStackTrace();
+        }
+       
+
     }
 }
