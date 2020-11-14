@@ -668,6 +668,19 @@ public class TestInteger{
         emp2.getId().compareTo(emp.getId());           //1, 因为emp2大于emp
         new Integer(100).compareTo(new Integer(100));  //0, 因为相等
         
+        //intValue方法
+        emp.getId().intValue();       //24 
+        
+        //parseInt方法，将字符串转为值类型。
+        String pwd = '123456';
+        int pwdInt = Integer.parseInt(pwd);
+        
+        //parseInt重载方法
+        Integer.parseInt("10111", 2)    //此处10111为二进制，用该方法可以转成十进制，为23
+        Integer.parseInt("14174", 8)    //6268
+        Integer.parseInt("0A8FC", 16)   //43260
+        
+        
     }
 }
 
@@ -677,3 +690,22 @@ Integer.MIN_VALUE //-2147483648
 Integer.BYTES    //4
 Integer.SIZE     //32
 
+//toBinaryString方法，返回一个二进制的字符串
+public static class IntergerParse(){
+    public String formIntegerToStringByArg(int target, int tag){
+        if(tag == 2) return Integer.toBinaryString(target);
+        else if(tag == 8) return Integer.toOctalString(target);
+        else if(tag == 16) return Integer.toHexString(target);
+        else return Integer.toBinaryString(target);
+    }
+}
+
+public class TestInteger2{
+    public static void main(String[] args){
+        int num = 2390;
+        IntegerParse.formIntegerToStringByArg(num, 2);    //100101010110
+        IntegerParse.formIntegerToStringByArg(num, 8);    //4526
+        IntegerParse.formIntegerToStringByArg(num, 16);   //956
+        IntegerParse.formIntegerToStringByArg(num, 5);    //100101010110
+    }
+}
