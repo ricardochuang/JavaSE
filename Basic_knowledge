@@ -460,3 +460,26 @@ public class TestSta2{
     }
 }
 
+
+//object类(顶级父类)
+public interface BaseInterface{
+  Object superMethod(Object obj);//可以存入任何类型
+}
+
+public class BaseInterfacesImp implements BaseInterface{
+    public Object superMethod(Object obj){
+        int []ints = (int[])obj;
+        return ints.length > 1 ? ints[0] + ints[1] : 0; //注意要进行强制转换
+    }
+
+}
+
+public class Test{
+    piblic static void main(String[] args){
+        BaseInterface baseInter = new BaseInterfacesImp();
+        int []ints = {34, 25}
+        int sum = (Integer)(baseInter.superMethod(ints));
+        System.out.println(sum); // 59
+    }
+
+}
