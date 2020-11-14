@@ -555,3 +555,50 @@ public class Test2{
         System.out.println(u.toString()); //{"id":NO1, "name":Bob, "age":69}
     }
 }
+
+
+//equals
+public class Employee(){
+    private String id;
+    private String name;
+    public String getId(){
+        return id;
+    }
+    public void setId(String id){
+       this.id = id;
+    }
+    public String getName(){
+        return name;
+    }
+    public String setName(String name){
+        this.name = name;
+    }
+    public Employee(String id, String name){
+        this.id = id;
+        this.name = name;
+    }
+    public Employee(){
+        
+    }
+    @Override
+    public boolean equals(Object obj){
+        Employee emp = (Employee)obj;
+        return this.getId().equals(emp.getId()) ? true : false;
+    }
+}
+public class Test3 {
+    public static void main(String[] args){
+        Employee emp0 = new Employee("123", "Bob");
+        Employee emp1 = new Employee("123", "Alice");
+        emp0.equals(emp1); //true
+    }
+}
+//getClass
+public class Test4 {
+    public static void main(String[] args){
+        Employee emp0 = new Employee("123", "Bob");
+        Class empClass = emp.getClass(); 
+        //使用class对象获取当前对象的类的完全限定名称
+        empclass.getName(); //可以得到类名，比如com.szb.entity
+    }
+}
