@@ -709,3 +709,25 @@ public class TestInteger2{
         IntegerParse.formIntegerToStringByArg(num, 5);    //100101010110
     }
 }
+
+
+//valueOf方法，把给定的参数转化成对象类型
+//toString方法
+public class TestValueOfMethod{
+    public static void main(String[] args){
+        int num = 1234;
+        Integer intObj0 = Integer.valueOf(num); 
+        System.out.println(intObj0.intValue());   //1234。注意，intValue是把Integer转为int
+        
+        Integer.valueOf("345").intValue;   //Integer.valueOf("345")是把字符串转成integer 
+        
+        Srting str = "1011010";
+        Integer intObj2 = Integer.valueOf(srt, 2); //90.valueOf可以将二进制转为十进制，其实是调用了parseInt方法
+        
+        Integer intObj = Integer.valueOf(156);
+        intObj.toString().length(); //3
+        intObj.toString(2);//不提倡。在toString没有参数的时候，是由对象进行调用的（调用的函数没有static）
+        Integer.toString(2);//有参数的时候，调用函数有static，是静态重载，应该用类进行调用
+        Integer.toString(intObj， 2); //10011100.将intObj转为二进制
+    }
+}
