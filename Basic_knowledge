@@ -753,4 +753,60 @@ public static class CharacterManager{ //跟实例无关，只是一个函数就�
         else if(ch0.compareTo(ch1) == 1) return "第一个大";
         else return "第二个大";
     }
+    
+    //统计密码中有多少字母，数字，大写字母，小写字母，非数字且非英文字符
+    public static void validatePassword(char[] passArr){
+      int num0 = 0; //数字
+      int num1 = 0; //字母
+      int num2 = 0; //大写
+      int num3 = 0; //小写
+      int num4 = 0; //非数字且非英文字符
+      
+      for(int i = 0; i < passArr.length; i++){
+         if(Character.isLetter(passArr[i])) ++num1;
+         if(Character.isDigit(passArr[i])) ++num0;
+         if(Character.isUpperCase(passArr[i])) ++num2;
+         if(Character.isLowerCase(passArr[i])) ++num3;
+         if(!Character.isLetterOrDigit(passArr[i])) ++num4;
+      }
+    }
+    
+    //删除空格
+    public static String dropSpaceChar(char []passArr){
+      String str = "";
+      for(int i = 0; i < passArr.length; i++){
+        if(!Character.isWhitespace(passArr[i])){
+          str + passArr[i];
+        }
+      }
+          return str;
+    }
+    
+     //改成大写or小写
+     public static final int UPPER=1;
+     public static final int LOWER=0;
+    public static char[] toUpperCaseOrLowerCase(char []passArr, int tag){
+      for(int i = 0; i < passArr.length; i++){
+        if(tag == UPPER){ //当tag为1的时候，即为UPPER，需要改成大写
+          passArr[i] = Character.toUpperCase(passArr[i]);
+        }
+        else passArr[i] = Character.toLowerCase(passArr[i]);
+      }
+          return passArr;
+    }
 }
+
+
+//Character的静态方法：isDefined(int ch), isDigit(int ch), isLetter(int ch), isLetterOrDigit(int ch), isLowerCase(int ch), isUpperCase(int ch), isWhitespace(int ch), toLowerCase(int ch), toUpperrCase(int ch)
+public class Test2{
+    public static void main(String[] args){
+       char []pwd = {'T','9','0','x',' ','_','4,'n'};
+       
+       CharacterManager.validatePassword(pwd);
+       
+       CharacterManager.dropSpaceChar(pwd);
+       
+       System.out.print(new String(CharacterManager.toUpperCaseOrLowerCase(pwd, CharacterManager.LOWER)));
+    }
+}
+
