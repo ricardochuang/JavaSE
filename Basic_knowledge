@@ -633,7 +633,35 @@ public class Test6 {
         }catch(CloneNotSupportedException e){
             e.printStackTrace();
         }
-       
+    }
+}
 
+//Integer包装类
+public final class Employee{
+    private Integer id; //使用包装类代替int
+    public Employee(Integer id){
+        this.id = id;
+    }
+    public Employee(){
+    }
+    public Integer getId(){
+        return id;
+    }
+    public Integer setId(Integer id){
+        this.id = id;
+    }
+} 
+
+public class TestInteger{
+    public static void main(String[] args){
+        Employee emp = new Employee();
+        Employee emp2 = new Employee();
+        
+        Integer intObj = new Integer(24);
+        emp.setId(intObj);
+        
+        Integer intObj2 = new Integer("24");//可以用int，也可以用string
+        emp.setId(intObj2);
+        
     }
 }
