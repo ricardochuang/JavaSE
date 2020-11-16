@@ -810,3 +810,22 @@ public class Test2{
     }
 }
 
+//system类
+System.out
+System.in
+System.err
+public static void exit(int status) //退出程序
+public static void gc() //垃圾回收，可以调用，但不一定马上执行
+public static long currentTimeMills() //获取当前系统时间，毫秒表示
+public static Properties getProperties()//获取当前系统map集合
+public static String getProperties() //按照给定的名称获取当前系统属性，字符串表示
+
+public class void main(String[] args){
+  Users [] userList = new Users[10000];
+  long begin = System.currentTimeMills(); //开始时间
+  for(int i = 0; i < 10000; ++i){userList[i] = new Users("用户" + i);}
+  long end = System.currentTimeMills(); //结束时间
+  (end - begin) / 1000 //储存对象所需时间，单位为秒
+}
+
+
