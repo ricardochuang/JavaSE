@@ -857,3 +857,4 @@ public static double max(double a, double b)
 public static double min(double a, double b)
 public static double pow(double a, double b) //a的b次幂
 public static double random() //0.0 - 1.0的随机数
+
