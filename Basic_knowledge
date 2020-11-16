@@ -845,3 +845,15 @@ public class Test{
   }
 }
 
+
+//Math类
+public static final double E
+public static final double PI
+public static double abs(int|long|double num)
+public static double cbrt(double num) //立方根
+public static double ceil(double num) //加一法取整
+public static double floor(double num) // 去尾法取整
+public static double max(double a, double b)
+public static double min(double a, double b)
+public static double pow(double a, double b) //a的b次幂
+public static double random() //0.0 - 1.0的随机数
