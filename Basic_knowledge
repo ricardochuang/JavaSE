@@ -949,3 +949,67 @@ publica class TestStringMethod{
     String dest3 = String.valueOf(new Boolean(true)); //字符串的true
   }
 }
+
+
+//StringBulider执行效率高，但是多线程不安全
+
+//StringBulider创建
+public StringBuild()
+public StringBuild(int capacity)
+public StringBuild(String str)
+public StringBuild(CharSequence seq)
+
+class TestStringBuilder{
+  void testCreateStringBuilder(){
+    StringBuilder builder = new StringBuilder();
+    builder.toString();
+    bulider.length();
+    bulider.capacatiy();
+  }
+}
+
+
+//StringBuilder常用方法
+public StringBuilder append(Object obj)
+public StringBuilder delete(int start, int end)
+public StringBuilder deleteCharAt(int index)
+public StringBuilder insert(int setoff, Object obj)
+public StringBuilder replace(int start, int end, String str)
+
+
+void testAppendMethod(){
+  StringBuilder builder = new StringBuilder("Hi!");
+  StringBuilder builder2 = builder.append(123): //Hi!123
+  builder == builder2; //true 直接在原来的builder上进行了append
+}
+
+viod testDeleteMethod(){
+  Sring res = StringManagement.testDelete("0123456789", 7, 9); //01234569包括头，不包括尾
+}
+
+viod testReplaceMethod(){
+  String target = "0123456789";
+  String res = StringManagement.testReplace(0, 2, 11); //1123456789包括头，不包括尾
+  
+}
+
+public class StringManagement{
+  public static String testDelete(String res, int strat, int end){
+      StringBuilder builder = new StringBuilder(res);
+      builder.delete(start, end);
+      return builder.toString();
+    }
+    
+    public static String testReplace(int strat, int end, String res,){
+      StringBuilder builder = new StringBuilder(res);
+      builder.replace(start, end, res);
+      return builder.toString();
+    }
+
+
+}
+
+
+
+
+
