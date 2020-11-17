@@ -886,6 +886,21 @@ public boolean equals(String target)
 public boolean equalsIgnoreCase(String target)
 public boolean endsWith(String suffix)
 public boolean startsWith(String prefix)
+public Sting trim()
+public int indexOf(int ch)
+public int indexOf(int ch, int fromIndex) //ch要查找的目标，fromIndex: 从什么地方开始
+public int indexOf(String target)
+public int indexOf(Stinrg target, int fromIndex)
+public int length()
+public String[] split(String regex)
+public String substring(int beginIndex)
+public String substring(int beginIndex, int endIndex)
+public char[] toCharArray()
+public String toLowerCase()
+public String toUpperCase()
+public String replace(char oldChar, char newChar)
+public String replace(String oldString, char newString)
+public static String valueOf(Object obj)
 
 publica class TestStringMethod{
   public static void main(String[] args){
@@ -897,5 +912,40 @@ publica class TestStringMethod{
     String a = "abc";
     String b = "abd";
     a.compareTo(b); //1表示a大于b， -1表示a小于b， 0表示相等
+    
+    //测试是否以某个字符串正则表达式所描述的开头或结尾的方法
+    String email = new String("abc@edu.com");
+    email.endsWith(".com"); //true，判断是否以.com结尾
+    
+    //去掉空格的trim方法，注意只能去掉开头和结尾的空格
+    String t = "  a  ";
+    String newT = t.trim(); //"a"
+    
+    
+    //对象的indexOf查找目标
+    int index = email.indexOf('@'); //3
+    
+    String lNames = "a,b,c"
+    Stirng[] charArray = lNames.split(","); //注意split中的string会被丢弃
+    
+    //substring
+    String str2 = new String("0123456789");
+    str2.substring(3); //3456789
+    str2.substring(0,4); //0123,只包括开头，不包括结尾
+    
+    //将字符串转为char数组
+    char []chars = "0123456789".toCharArray();
+    
+    //字符串包含方法
+    String name2 = "A.b";
+    name2.contains("."); //true
+    
+    //字符串替换方法
+    String color = "blue";
+    color.replace('u', 'l'); //blle
+    color.replace("blue", "yellow");
+    
+    //静态方式构建字符串对象
+    String dest3 = String.valueOf(new Boolean(true)); //字符串的true
   }
 }
