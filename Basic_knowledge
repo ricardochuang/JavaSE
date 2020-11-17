@@ -983,13 +983,19 @@ void testAppendMethod(){
   builder == builder2; //true 直接在原来的builder上进行了append
 }
 
-viod testDeleteMethod(){
+void testDeleteMethod(){
   Sring res = StringManagement.testDelete("0123456789", 7, 9); //01234569包括头，不包括尾
 }
 
-viod testReplaceMethod(){
-  String target = "0123456789";
-  String res = StringManagement.testReplace(0, 2, 11); //1123456789包括头，不包括尾
+void testReplaceMethod(){
+  String target = "a=1";
+  String res = StringManagement.testReplace(target, ":"); //a:1
+  
+}
+
+void testInsertMethod(){
+  String target = "age:,name:Z";
+  String res = StringManagement.testInsert(target, "age:,", 18); //a:1
   
 }
 
@@ -1000,12 +1006,27 @@ public class StringManagement{
       return builder.toString();
     }
     
-    public static String testReplace(int strat, int end, String res,){
+    
+    //将"="替换成"："
+    public static String testReplace(String res, String replace){
       StringBuilder builder = new StringBuilder(res);
-      builder.replace(start, end, res);
+      if(builder.toString().contains("=")){
+        builder.replace(builder.indexOf("="), builder.indexOf("=") + 1, replace)；
+        return StringManagement.testReplace(builder.toString(),replace);
+      }
       return builder.toString();
     }
-
+    
+    //age:,插入18
+    public static String testInsert(String res, String tag, Object inserObj){
+      StringBuilder builder = new StringBuilder(res);
+      if(builder.toString().contains(tag)){
+        int insertTag = builder.indexOf(tag) + 4;
+        builder.insert(insertTag, insertObj);
+        return StringManagement.testInsert(builder.toString(), tag, inserObj);
+      }
+      return builder.toString();
+    }
 
 }
 
