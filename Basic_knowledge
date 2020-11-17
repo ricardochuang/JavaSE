@@ -1037,7 +1037,7 @@ public class StaffDao{
     if(args.size() != 0){ 
     sqlBul.append("where 1=1");
     if(args.containsKey("name") != null){
-      sqlBul.append("and name = " + args.get("name")
+      sqlBul.append("and name = " + args.get("name"))
     }
     System.out.println(sqlBul.toString());
   }
