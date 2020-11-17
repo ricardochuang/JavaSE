@@ -862,6 +862,8 @@ public static double random() //0.0 - 1.0的随机数
 //String类
 public String()
 public String(char[] chars, int offset, int count) //chars:从其他char[]创建string， offset：从哪一个开始， count：要几个
+
+
 public class TestCreateStringObject{
    public static void main(String[] args){
       String dec = "Abc";
@@ -875,5 +877,25 @@ public class TestCreateStringObject{
       System.out.println(str); //2"A
       
    }
+}
 
+//常用方法
+public char charAt(int index)
+public int compareTo(String target)
+public boolean equals(String target)
+public boolean equalsIgnoreCase(String target)
+public boolean endsWith(String suffix)
+public boolean startsWith(String prefix)
+
+publica class TestStringMethod{
+  public static void main(String[] args){
+    String name = "Bob";
+    
+    char res = name.charAt(2); //b
+    
+    
+    String a = "abc";
+    String b = "abd";
+    a.compareTo(b); //1表示a大于b， -1表示a小于b， 0表示相等
+  }
 }
