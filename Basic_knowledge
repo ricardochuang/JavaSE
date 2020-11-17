@@ -1030,7 +1030,23 @@ public class StringManagement{
 
 }
 
+//append实现数据库select的拼写
+public class StaffDao{
+  public void findByArgs(Map<String, Object> args){
+    StringBuilder sqlBul = new StringBuilder("select * from staff ");
+    if(args.size() != 0){ 
+    sqlBul.append("where 1=1");
+    if(args.containsKey("name") != null){
+      sqlBul.append("and name = " + args.get("name")
+    }
+    System.out.println(sqlBul.toString());
+  }
+}
 
-
-
+void testSql(){
+  Map<String, Object> map = new HashMap<String, Object>();
+  new StaffDao().findByArgs(map); //select * from staff
+  map.put("name", "King");
+  new StaffDao().findByArgs(map);//select * from staff where name = 'King'
+} 
 
