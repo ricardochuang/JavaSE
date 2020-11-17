@@ -858,3 +858,22 @@ public static double min(double a, double b)
 public static double pow(double a, double b) //a的b次幂
 public static double random() //0.0 - 1.0的随机数
 
+
+//String类
+public String()
+public String(char[] chars, int offset, int count) //chars:从其他char[]创建string， offset：从哪一个开始， count：要几个
+public class TestCreateStringObject{
+   public static void main(String[] args){
+      String dec = "Abc";
+      String newDec = new String(dec);
+      
+      System.out.println(dec.equals(newDec)); //true string的equals用来判断内容是否相同
+      System.out.println(dec == newDec); //false,地址不同
+      
+      char [] chs = {'2',34, 'A'};
+      Sring str = new String(chs);
+      System.out.println(str); //2"A
+      
+   }
+
+}
