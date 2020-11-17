@@ -1039,14 +1039,14 @@ public class StaffDao{
     if(args.containsKey("name") != null){
       sqlBul.append("and name = " + args.get("name"))
     }
-    System.out.println(sqlBul.toString());
   }
+   System.out.println(sqlBul.toString());
 }
 
 void testSql(){
   Map<String, Object> map = new HashMap<String, Object>();
   new StaffDao().findByArgs(map); //select * from staff
   map.put("name", "King");
-  new StaffDao().findByArgs(map);//select * from staff where name = 'King'
+  new StaffDao().findByArgs(map);//select * from staff where name = King
 } 
 
