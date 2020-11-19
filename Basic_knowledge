@@ -1151,6 +1151,7 @@ class TestCase{
 }
 
 
+
 //DateFormat 日期格式化
 DateFormat.getDatelnstance() //获取DateFormat实例
  @Test
@@ -1172,4 +1173,31 @@ void useDateFormat (){
   df3.format(d0); //1970-5-24
   df4.format(d0); //1970年5月24日 星期日
 }
+
+
+//SimpleDateFormat类
+public SimpleDateFormat() //yy-M-dd ah:m (上下午，小时，分钟)
+public SimpleDateFormat(String pattern)
+public SimpleDateFormat(String pattern, Locale locale) //用来考虑不同国家
+
+public class FormatDateManagment{
+  
+}
+
+@Test
+void testUseSimpleDateFormat(){
+
+  //默认形式格式化日期对象
+  Date d0 = new Date(12345678222889L);
+  SimpleDateFormat sdf0 = new SimpleDateFormat();
+  sdf0.format(d0); //70-5-24 上午5:21
+  
+   //给定格式化日期对象
+  SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd a", locale.en);
+  sdf2.format(d0); //1970/05/24 AM
+}
+
+
+
+
 
