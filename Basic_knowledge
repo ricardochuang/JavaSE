@@ -1194,6 +1194,20 @@ public class FormatDateManagment{
     SimpleDateFormat sdf = new SimpleDateFormat(pattern);
     return sdf.format(source);
   }
+  
+  //将给定的符合标准的日期时间字符串形式转换为Date对象
+  public static String fromSrtingToDateByPattern(String dateStr, String pattern){
+    Date target = null;
+    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+    try{
+      target = sdf.parse(dateStr);
+      }catch(ParseException e){
+        e.printStackTrace();
+      }
+    return target;
+  }
+}
+
 }
 
 @Test
@@ -1215,5 +1229,13 @@ void testFormatDateManagment(){
   String res = FormatDateManagment.fomatDateByPattern(d0, FormatDateManagment.Long_TIME); //05:21:18 0228
 }
 
+
+
+
+@Test
+void testfromSrtingToDateByPattern(){
+  String dateStr = "2017-12-24";
+  Date resDate = FormatDateManagment.fromSrtingToDateByPattern(dateStr, FormatDateManagment.LSHORT_DATE); // 2017-1-1 0:00:00
+}
 
 
