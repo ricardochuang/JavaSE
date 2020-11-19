@@ -1050,3 +1050,59 @@ void testSql(){
   new StaffDao().findByArgs(map);//select * from staff where name = King
 } 
 
+
+//Date类
+
+//Date对象的创建
+public Date()
+public Date(long date)
+
+public class Employee{
+  private String name;
+  private Date birth;
+  
+  public void setName(String Name){
+    this.name = name;
+  }
+  
+  public void getName(){
+    return name;
+  }
+  
+  public void setBirth(String Birth){
+    this.birth = birth;
+  }
+  
+  public void getBirth(){
+    return birth;
+  }
+  
+  public Employee(String name. Date birth){
+    this.name= name;
+    this.birth = birth;
+  }
+  public Employee(){
+  }
+}
+
+
+public class DateSupport{
+  pubilc Employee createEmp(String name, Date birth){
+    return new Employee(name, birth);
+  }
+}
+
+class TestCase{
+  DateSupport ds = new DateSupport();
+  @Test
+  void testcreateEmp(){
+    String name = "Bob";
+    Date birth = new Date();
+    Employee emp = ds.createEmp(name, birth);
+    emp.getName();
+    emp.getBirth();//输出的方式很奇怪，所以一般不用了
+    
+  }
+}
+
+
