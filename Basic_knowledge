@@ -1057,6 +1057,14 @@ void testSql(){
 public Date()
 public Date(long date)
 
+//Date尚未废除的方法
+//public boolean after(Date when)
+//public boolean before(Date when)
+//public int compareTo(Date anotherDate)
+//public long getTime()
+//public void setTime(long time)
+//public String toString() 星期 月份 天 hh:mm:ss 时区 年
+
 public class Employee{
   private String name;
   private Date birth;
@@ -1090,7 +1098,24 @@ public class DateSupport{
   pubilc Employee createEmp(String name, Date birth){
     return new Employee(name, birth);
   }
+  
+  public String eqEmpBirth(Employee e0, Employee e2){
+    return e0.getBirth().after(e2.getBirth()) ? e0.getName() + "比" + e2.getName() + "出生早" : e0.getName() + "没有" + e2.getName() + "出生早";
+  }
+  
+  //对给定的date对象实现时间运算，tag大于0则增加num毫秒，小于0减少num毫秒
+  public Date changeDate(Date date, long num, int tag){
+    if(tag > 0){
+      date.setTime(date.getTime() + num);
+    }else{
+      date.setTime(date.getTime() - num);
+    }
+    
+    return date;
+  }
 }
+
+
 
 class TestCase{
   DateSupport ds = new DateSupport();
@@ -1101,8 +1126,26 @@ class TestCase{
     Employee emp = ds.createEmp(name, birth);
     emp.getName();
     emp.getBirth();//输出的方式很奇怪，所以一般不用了
+    }
     
-  }
+    void testEqEmpBirth(){
+      Employee e0 = new Employee("Bob", new Date(new Date().getTime() - 100000));
+      Employee e2 = new Employee("Alice", new Date(new Date().getTime() - 100));
+      ds.eqEmpBirth(e0, e2); //Bob没有Alice出生早
+      
+    }
+    
+    void testChangeTime(){
+      Date d0 = new Date(12345678)；
+      int tag = 2;
+      long num = 10000;
+      Date d2 = ds.changeDate(d0, num, tag); //12355678
+      d0.getTime(); //12355678,会覆盖原来的对象
+      d0 == d2; //true
+    }
 }
+
+
+
 
 
