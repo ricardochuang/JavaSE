@@ -1143,9 +1143,33 @@ class TestCase{
       d0.getTime(); //12355678,会覆盖原来的对象
       d0 == d2; //true
     }
+    
+    void testToStringForDate(){
+      Date d0 = new Date(12345678222889L); //L是long的后缀
+      d0.toString(); //Wed Mar 22 03:03:42 CST 2361
+    }
 }
 
 
+//DateFormat 日期格式化
+DateFormat.getDatelnstance() //获取DateFormat实例
+ @Test
+void useDateFormat (){
+  Date d0 = new Date(12345678222889L);
+  DateFormat df = DateFormat.getDateInstance();   //抽象类，不能直接实例化。可以用提供的静态方式实现构建
+  df.format(d0); //1973-11-30
+  
+  //使用给定的格式化构建DateFormat
+  
 
+  DateFormat df2 = DateFormat.getDateInstance(DateFormat.MEDIUM);
+  DateFormat df3 = DateFormat.getDateInstance(DateFormat.MONTH_FIELD);
+  DateFormat df4 = DateFormat.getDateInstance(DateFormat.FULL);
+  
+  //以不同样式格式化日期对象
 
+  df2.format(d0); //1970-5-24
+  df3.format(d0); //1970-5-24
+  df4.format(d0); //1970年5月24日 星期日
+}
 
