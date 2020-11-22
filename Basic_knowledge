@@ -1240,8 +1240,32 @@ void testfromSrtingToDateByPattern(){
 
 
 //calendar类
+//创建
 public static Calendar getInstance()
 public static Calendar getInstance(Locale aLocale)
+//主要常量字段
+//public static final int AM
+//public static final int PM
+//public static final int AM_PM
+//public static final int YEAR
+//public static final int MONTH
+//public static final int DATE
+//public static final int HOUR
+//public static final int HOUR_OF_DAY
+//public static final int MINUTE
+//public static final int SECOND
+//public static final int MILLISECOND
+//public static final int WEEK_OF_MONTH
+//public static final int WEEK_OF_YEAR
+//主要方法
+//public abstract void add(int field, int value)
+//public boolean after(Object when)
+//public boolean before(Object when)
+//public boolean compareTo(Calendar anotherCalendar)
+//public final Date getTime()
+//public void set(int field, int value)
+//public final void set(int year, int month, int date)
+//public final void set(int year, int month, int date, int hourOfDay, int minute, int second)
 
 @Test
 void testCreateCalendar(){
