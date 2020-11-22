@@ -1305,7 +1305,106 @@ void testformatDateByTags(){
 
 //List接口和实现类
 //List接口常用方法
+boolean add(Object e)
+void add(int index, Object element)//指定位置添加
+void clear()//所有元素清空
+boolean contains(Object o)
+Object get(int index)
+int size()
+Iterator<E> iterator()
+Object remove(int index)
+boolean remove(Object o)
+Object set(int index, Object element)
+public int indexOf(Object target)
+boolean isEmpty()
+void sort(Cpmparator comparator)
 
+//ArraryList 非线程安全 Vector 线程安全
+
+
+//做一个模拟数据库
+//部门信息表
+public final class DataBase{
+  private static List departmentTable = new ArrayList();
+  public static List getDepartmentTable(){
+    return departmentTable;
+  }
+  public static void setDepartmentTable(List departmentTable){
+    DataBase.departmentTable = departmentTable;
+  }
+}
+
+public class Department{
+  private String id;
+  private String name;
+  private Date createDate;
+  
+}
+
+//数据访问接口
+public interface IDepartmentDao{
+  void addDepartment(Department dep);
+  Vector loadDepartment(); 
+}
+
+
+//部门数据访问接口实现组件
+public class DepartmentDaoImp implements IDepartmentDao{
+  @Override
+  public void addDepartment(Department dep){
+  //使用List的add方法实现员工添加到数据库中
+    Database.getDepartmentTable().add(dep);
+  }
+  @Override
+  public Vector loadDepartment(){
+    Vector deps = new Vector(); //封装所有员工信息列表
+    List list = DataBase.getDepartmentTable();//获取部门表中符合要求的数据
+    //对list进行遍历，获取每条封装记录Department对象
+    for(int i = 0; i < list.size(); i++ ){
+      deps.add(list.get(i)); //获取部门记录存在vector集合中
+    }
+    return deps;
+  }
+}
+
+class TestCase{
+  @Test
+  void testAddDepartmentToTable(){
+    Scanner input = new Scanner(System.in);
+    IDpartmentDao dao = new DepartmentDaoImp();
+    for(int i =1; i <= 5; i++)
+    {
+    
+     System.out.println("部门ID");
+     String id = input.next();
+     System.out.println("部门名称");
+     String name = input.next();
+     System.out.println("部门成立年份");
+     int y = input.next();
+     System.out.println("部门成立月份");
+     int m = input.next();
+     System.out.println("部门成立日期");
+     int d = input.next();
+     Department dep = new Department();
+     dep.setId(id);
+     dep.setName(name);
+     Calendar cal = Calendar.getInstance();
+     cal.set(Calendar.YEAR, y);
+     cal.set(Calendar.MONTH, m);
+     cal.set(Calendar.DATE, d);
+     dep.setCreateDate(cal.getTime());
+     dao.addDepartment(dep);
+    }
+  //查询所有部门信息
+  Vector depVector = dao.loadDepartment();
+  System.out.println("部门ID\t\t部门名称\t\t成立日期")
+  for(int j = 0; j < depVector.size(); ++j){
+    Department depRes = (Department)depVector.get(j);
+    System.out.println(depRes.getId() + "\t\t" + depRes.getName() + "\t\t" + new SimpleDateFormat("yyyy-MM-dd").format(depRes.getCreateDate));
+  }
+  
+  }
+}
 
 
 
