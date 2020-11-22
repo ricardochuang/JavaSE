@@ -1303,5 +1303,12 @@ void testformatDateByTags(){
     if(obj != null && obj instaneceof java.util.String) System.out.println(obj);
 }
 
+//List接口和实现类
+//List接口常用方法
+
+
+
+
+
 
 
