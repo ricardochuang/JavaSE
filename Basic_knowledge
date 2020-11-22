@@ -1239,3 +1239,17 @@ void testfromSrtingToDateByPattern(){
 }
 
 
+//calendar类
+public static Calendar getInstance()
+public static Calendar getInstance(Locale aLocale)
+
+@Test
+void testCreateCalendar(){
+    Calendar cal = Calendar.getInstance(); 
+    cal.get(Calendar.YEAR); //2020
+    
+    Calendar cal2 = Calendar.getInstance(Locale,JAPAN);
+    Date japanDate = cal2.getTime();
+    new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss", Locale.JAPAN).format(japanDate);
+}
+
