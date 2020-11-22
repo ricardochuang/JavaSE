@@ -1277,3 +1277,31 @@ void testCreateCalendar(){
     new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss", Locale.JAPAN).format(japanDate);
 }
 
+
+public Object formatDateByTags(int y, int m, int d, int tags){
+  //根据给定的tags，返回string或date。tags为0时候返回date，1返回string
+  Calendar cal = Calendar,getInstance();
+  cal.set(Calendar.YEAR, y);
+  cal.set(Calendar.MONTH, m-1);
+  cal.set(Calendar.DATE, d);
+  if(tags == 0) return cal.getTime();
+  return new SimpleDateFormat("yyyy年MM月dd日").format(cal.getTime());
+}
+
+@Test
+void testformatDateByTags(){
+    Scanner in = new Scanner(System.in);
+    System.out.println("输入生日年");
+    int y = int.nextInt();
+    System.out.println("输入生日月");
+    int m = int.nextInt(); //注意月份是从0-11
+    System.out.println("输入生日日");
+    int d = int.nextInt();
+    
+    Object obj = DateSupport.formatDateByTags(y, m, d, 0);
+    if(obj != null && obj instaneceof java.util.Date) System.out.println((Date)obj.toLocaleString);
+    if(obj != null && obj instaneceof java.util.String) System.out.println(obj);
+}
+
+
+
