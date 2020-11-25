@@ -93,10 +93,13 @@ public class DataManger{
 
 public class TestDog{
     public static void main(String[] args){
+    
+        DataManger dm = new DataManger();
+        
         Dog dog = new Dog("Brown");
         
         System.out.println(dog.getColor()); //此时未改变颜色，为棕色
-        dog.changeColor(dog);
+        dm.changeColor(dog);
         System.out.println(dog.getColor()); //此时未改变颜色，为黑色
     }
 
