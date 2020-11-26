@@ -1406,8 +1406,49 @@ class TestCase{
     System.out.println(depRes.getId() + "\t\t" + depRes.getName() + "\t\t" + new SimpleDateFormat("yyyy-MM-dd").format(depRes.getCreateDate));
   }
   
+  @Test
+  void testListIetra(){
+   Vector depVector = dao.loadDepartments();
+   if(depVector != null && !depVector.isEmpty()){
+     Iterator iterator = depVector.iterator();
+        //使用迭代器遍历集合元素
+     while(iterator.hasNext()){
+     Department dep = iterator.next();
+     System.out.println(dep.getId() + "\t" + dep.getName());
+   }
+     
+   }
+}
+  
+  @Test
+  void testAggregateSort(){
+    Vector depVector = dao.loadDepartments();
+    class ComparatorImp implements Comparator{
+      @Override
+      public int compare(Object o1, Object o2){
+        Department dep0 = (Department)o1;
+        Department dep2 = (Department)o2;
+        
+        if(dep0.getCreateDate().getTime() > dep2.getCreateDate().getTime())
+          return -1; //倒序排列，从大到小
+        else if(dep0.getCreateDate().getTime() < dep2.getCreateDate().getTime())
+          return 1;
+        else
+          return 0;
+      }
+    }
+    depVector.sort(new ComparatorImp());
+     System.out.println("部门ID\t\t部门名称\t\t成立日期")
+  for(int j = 0; j < depVector.size(); ++j){
+    Department depRes = (Department)depVector.get(j);
+    System.out.println(depRes.getId() + "\t\t" + depRes.getName() + "\t\t" + new SimpleDateFormat("yyyy-MM-dd").format(depRes.getCreateDate));
+  }
+  }
+  
   }
 }
+
+
 
 
 
