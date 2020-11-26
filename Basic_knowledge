@@ -1511,4 +1511,33 @@ class TestCase{
   }
 }
 
+//TreeSet 默认升序排列 不是线程同步
+//常用方法
+public TreeSet(Comparator<E> comparator)
+public Iterator<E> descendingIterator() //方向迭代器
+public E last() //返回最后一个object
+public E first() //返回第一个object
+
+@Test
+void testTreeSetSort(){
+   TreeSet tree = new TreeSet();//默认升序
+   tree.add(Integer.valueOf(34));
+   tree.add(Integer.valueOf(10));
+   tree.add(Integer.valueOf(343));
+   tree.add(Integer.valueOf(324));
+   tree.add(Integer.valueOf(5));
+   
+   for(Object e : tree){
+     System.out.println(e); //5 10 34 324 343
+   }
+   
+   Iterator it = tree.descendingIterator();
+   while(it.hasNext){
+     System.out.println(it.next()); //343 324 34 10 5
+   }
+}
+
+
+
+
 
