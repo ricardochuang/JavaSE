@@ -1644,8 +1644,17 @@ class TestCase{
 }
 
 
+//Hashtable 线程同步，不允许有null（HahshMap可以有null）
+//TreeMap 不是线程安全
 
-
+@Test
+void testTreeMap(){
+  treeMap tree = new TreeMap(); //采用默认升序
+  tree.put("b", "King1");
+  tree.put("a", "King2");
+  tree.put("e", "King3");
+  Systme.out.println(tree); //{a = King2, b = King1, e = King3}
+}
 
 
 
