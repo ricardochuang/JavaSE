@@ -1460,7 +1460,7 @@ int size()
 boolean isEmpty()
 Object[] toArray()
 
-//HashSet不是多线程安全
+//HashSet  不是多线程安全
 
 public final class DataBase{
   //员工信息表
@@ -1485,6 +1485,7 @@ public final class DataBase{
 
 public interface IEmployeeDao{
   Set loadEmployeeSet();
+  TreeSet loadEmployeeSetSort();
 }
 
 public class EmployeeDaoImp implents IEmployeeDao{
@@ -1492,6 +1493,27 @@ public class EmployeeDaoImp implents IEmployeeDao{
   @Override
   public Set loadEmployeeSet(){
      return DataBase.getEmployeeTable(); //返回员工集合
+  }
+  
+  @Override
+  public TreeSet loadEmployeeSetSort(){
+     TreeSet resSet = new TreeSet( new Comparator() {
+       @Override
+       public int compare(Object o1, Object o2){
+         Employee emp0 = (Employee) o1;
+         Employee emp2 = (Employee) o2;
+         if(emp0.getEntryDate(),getTime() > emp2.getEntryDate(),getTime())
+          return -1;
+         if(emp0.getEntryDate(),getTime() < emp2.getEntryDate(),getTime())
+          return 1;
+         else return 0; //降序
+       }
+     } );
+     Set tempSet = DataBase.getEmployeeTable();
+     for(Object o: tempSet){
+       resSet.add(o); //添加到新的treeset集合中
+     }
+     return resSet;
   }
 }
 
@@ -1537,7 +1559,26 @@ void testTreeSetSort(){
    }
 }
 
+@Test
+void test loadEmployeeSetSort(){
+    DataBase.initEmployeeTable();
+    TreeSet resSet = empDao.loadEmployeeSetSort();
+    for(Object e: resSet){
+      Employee emp = (Employee)e;
+      System.out.println(emp.getId() + "\t\t" + emp.getName());
+    }
+}
 
+//LinkedHashSet 维持原始顺序
 
-
+@Test
+void testLinkedHashSet(){
+  LinkedHash set = new LinkedHash();
+  set.add(new Integer(250));
+  set.add(new Integer(260));
+  set.add(new Integer(911));
+  set.add(new Integer(120));
+  
+  //输出： 250 260 911 120
+}
 
