@@ -1500,6 +1500,7 @@ class TestCase{
   
   @Test
   void testLoadEmployeeSet(){
+    DateBase.initEmployeeSet(); //先初始化数据
     Set empSet = empDao.loadEmployeeSet();
     //获取set接口的迭代器，实现对集合元素的遍历
     Iterator iterator = empSet.iterator();
