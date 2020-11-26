@@ -1449,9 +1449,65 @@ class TestCase{
 }
 
 
+//set集合接口和实现类
+//集合方法规范
+boolean add(Object e)
+void clear()
+boolean contains(Object o)
+Iterator<E> iterator()
+boolean remove(Object o)
+int size()
+boolean isEmpty()
+Object[] toArray()
+
+//HashSet不是多线程安全
+
+public final class DataBase{
+  //员工信息表
+  private static Set employeeTable = new HashSet();
+  
+  
+  //添加员工对象到信息表
+  public static initEmployeeTable(){
+    Employee emp0 = new Employee();
+    emp0.setId("EMP100");
+    emp0.setName("王军");
+    emp0.MobilePhone(13333333333L);
+    emp0.setBirth(new SimpleDateFormat("yyyy-MM-dd").parse("1988-10-10"));
+    emp0.setEntryDate(new SimpleDateFormat("yyyy-MM-dd").parse("2017-10-10"));
+    emp0.setDepId("DEPNO1001");
+    
+    //添加员工
+    employeeTable.add(emp0);
+  }
+}
 
 
+public interface IEmployeeDao{
+  Set loadEmployeeSet();
+}
 
+public class EmployeeDaoImp implents IEmployeeDao{
+//获取所有员工信息
+  @Override
+  public Set loadEmployeeSet(){
+     return DataBase.getEmployeeTable(); //返回员工集合
+  }
+}
 
+class TestCase{
+  IEmployeeDao empDao = new EmployeeDaoImp();
+  
+  @Test
+  void testLoadEmployeeSet(){
+    Set empSet = empDao.loadEmployeeSet();
+    //获取set接口的迭代器，实现对集合元素的遍历
+    Iterator iterator = empSet.iterator();
+    while(iterator.hasNext()){
+      Employee emp = (Employee)iterator.next();
+      System.out.println(emp.getId() + "\t\t" + emp.getName() + "\t\t" + emp.getMobilePhone() + "\t\t" + new SimpleDateFormat("yyyy-MM-dd").format(emp.getBirth()) + "\t\t" + new SimpleDateFormat("yyyy-MM-dd").format(emp.getEntryDate()) + "\t\t" + emp.getDepId());
+    }
+  }
+}
 
 
