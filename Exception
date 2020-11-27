@@ -56,4 +56,13 @@ public class TypeManagment{
     }
 }
 
-
+public Test2{
+        public static void main(String[] args){
+                File file = new File("");
+                try{
+                        new TypeManagment().manageType(file);
+                }catch(TypeNotSupportedException e){
+                        e.printStackTrace();
+                }
+        }
+}
