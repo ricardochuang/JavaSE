@@ -1,0 +1,59 @@
+public class FileManagement{
+    public void saveFileToTarget(File file, String filePath) throws FileNotFoundException{
+        if(！file.exists()){//如果目标文件找不到，则抛出FileNotFoundException实例
+        //抛出异常实例导致应用方法调动转向异常处理程序
+            throw new FileNotFoundException();//引发异常（抛出异常实例一定是有条件的）
+        }
+        //执行正常方法的功能业务
+    }
+}
+
+//需要处理异常
+//方法一：再用一次throws
+class TestCase{
+    @Test 
+    void test() throws FileNotFoundException{
+        FileManagement fm = new FileManagement();
+        File file = new File("f:\\file\\My.txt");
+        fm.saveFileToTarget(file,"d:/files/");
+    }
+}
+
+//方法二：使用try处理
+public class Strat{
+    public static void main(String[] args){
+        FileManagement fm = new FileManagement();
+        File file = new File("f:\\file\\My.txt");
+        try{
+            fm.saveFileToTarget(file,"d:/files/");
+        } catch(FileNotFoundException e){
+            e.printStackTrace();
+        }fianlly{
+        //此处释放异常出现前被占用的系统资源对象
+        }
+    }
+}
+
+//自定义异常
+public TypeNotSupportedException extends Exception{
+    private String message = "类型不匹配";
+    public String getMessage(){
+        return message;
+    }
+    public TypeNotSupportException(String message){
+        this.message = message;
+    }
+    public TypeNotSupportException(){
+    }
+}
+
+//使用自定义异常
+public class TypeManagment{
+    public void manageType(Object obj) throws TypeNotSupportedException{
+        if(!(obj instanceof BaseType))
+            throws new TypeNotSupportedException("对象参数" + "不符合BaseType" );
+        System.out.println("成功")；
+    }
+}
+
+
