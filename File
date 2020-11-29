@@ -25,3 +25,33 @@ public boolean canRead()
 public boolean creatNewFile() throws IOException
 public boolean delete()
 public boolean exists()
+
+public class FileSupport{
+        //根据给定的filePath创建File对象并返回
+        public static File createFile(Srting filePath){
+                return new File(filePath);
+        }
+        public static void displayFileInfo(File file) throws IOException{
+                System.out.println(file.canRead() ? "可以读取" : "不可读");
+                System.out.println(file.canWrite() ? "可以写" : "不可写");
+                System.out.println(file.exists() ? "此文件存在" : "文件不存在");
+                System.out.println(file.delete() ? "文件已经删除" : "删除失败");
+                System.out.println(file.createNewFile() ? "创建成功" : "创建失败");
+        }
+}
+
+
+public class Test2{
+        public static void main(String[] args){
+                Stirng filePath = "d:/files.doc\\carnames.txt";
+                File file = FileSupport.createFile(filePath);
+                
+                try{
+                    FileSupport.displayFileInfo(file);
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+        }
+}
+
+
