@@ -81,3 +81,8 @@ publlic static boolean createFolder(String dirPath){
 }
 
 
+字节输入流主要方法
+public abstract int read()throws IOException //返回的是拿到的字节的量
+public int read(byte[] b)throws IOException //可以拿到字节，放到缓冲区缓存
+public int read(byte[] b, int off, int len)throws IOException
+public int close()throws IOException
