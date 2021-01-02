@@ -86,3 +86,58 @@ public abstract int read()throws IOException //返回的是拿到的字节的量
 public int read(byte[] b)throws IOException //可以拿到字节，放到缓冲区缓存
 public int read(byte[] b, int off, int len)throws IOException
 public int close()throws IOException
+
+public class FileInAndOutSupport{
+    public static void testRead(File file){
+        if(file.exists()){
+        InputStream in = null;
+            try{
+                in = new FileInputStream(file);
+                int count = 0; //记录读取一个字节返回的int字节值
+                while( count = in.read()!= -1 ){
+                    System.out.println(count);
+                }catch(FileNotFoundException e){
+                    e.printStackTrace();
+                }catch(IOExcepttion e){
+                    e.printStackTrace();
+                }finally{
+                    in.close(); //关闭输入流，释放资源
+                }
+                
+            }
+        }
+    }
+}
+
+
+in = new FileInputStream(file);
+byte [] bys = new byte[6]; //作为读取字节数据的临时缓冲区
+int count = 0; //记录实际读取的并填充缓冲区的实际字节数
+while( (count = in.read(bys)) != -1 ){ //count = in.read(bys, 0, by.length)
+    String str = new String(bys, 0, count);
+    System.out.println(str);
+}
+
+二进制缓冲输入流
+public static long useBufferInputStream(File file){
+    long size = 0;
+    if(file.exits()){
+        InputStream in = null;
+        BufferedInputStream bin = null; //缓冲流
+        try{
+            in = new FileInputStream(file); //建立基于文件的普通输入流
+            bin = new BufferedInputStream(in); //基于二进制输入流建立缓冲流
+            byte [] bys = new byte[1024*10]; //临时缓冲区
+            int count = 0;
+            while((count = bin.read(bys, 0, bys.length)) != -1){
+                size += count; //累加实际读取到的字节数
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            bin.close();
+            in.close();
+        }
+        return size;
+    }
+}
