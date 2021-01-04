@@ -141,3 +141,64 @@ public static long useBufferInputStream(File file){
         return size;
     }
 }
+
+
+字符输入流
+主要方法
+public int read() throws IOException
+public int read(char[] cbuf) throws IOException
+public abstract int read(char[] cbuf, int off, int len) throws IOException
+public void close() throws IOException
+
+
+使用文本流读取文本文件
+public static void useCharInputStream(File file){
+    if(file.exists()){
+        Reader reader = null;
+        try{ 
+            reader = new FileReader(file);
+            char chs = new char[124];//文本缓冲区
+            int count = 0;
+            while((count = reader.read(chs, 0 ,chs.length)) != -1){
+                System.out.println(new String(chs, 0, count));
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finall{
+            reader.close();
+        }
+    }
+}
+
+按行读取信息
+public static List<User> readUserInforFromFile(File userFile){
+    List<User> users = new ArrayList<>();
+    if(userFile.exits()){
+        Reader r = null;
+        BufferedReader br = null;
+        try{
+            r = new FileReader(useFile);
+            br = new BufferedReader(r);
+            String lineStr = ""; //临时存储读取到的单行字符串
+            while((lineStr = br.readLine()) != null && !lineStr.equals("")){//使用文本缓冲流按行进行循环读取
+                User user = new User();
+                String [] strs = lineStr.split(" "); //按照空格拆分字符串
+                user.setId(strs[0]);
+                user.setName(strs[1]);
+                user.setGenger(strs[2]);
+                user.setBirth(new SimpleDateFormat("yyyy-MM-dd").parse(strs[3]));
+                user.setGenger(strs[4]);
+                
+                users.add(user);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            br.close();
+            r.close();
+        }
+    }
+    return users;
+}
+
+
