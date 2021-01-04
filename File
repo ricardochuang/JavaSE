@@ -201,4 +201,10 @@ public static List<User> readUserInforFromFile(File userFile){
     return users;
 }
 
+二进制输出流
+主要方法
+public void write()throws IOException 
+public void write(byte[] b)throws IOException
+public void write(byte[] b, int off, int len)throws IOException
+public void close()throws IOException
 
