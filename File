@@ -208,3 +208,12 @@ public void write(byte[] b)throws IOException
 public void write(byte[] b, int off, int len)throws IOException
 public void close()throws IOException
 
+public static void saveContentToFile(String content, File target){
+    if(target != null){
+        byte bys [] = content.getBytes(); //使用content构建一个byte数组
+        OutputStream out = null;
+        out = new FileOutputStream(target);
+        out.write(bys);//将内容写入目标文件中
+        out.close();
+    }
+}
