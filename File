@@ -217,3 +217,167 @@ public static void saveContentToFile(String content, File target){
         out.close();
     }
 }
+
+
+
+文件复制（二进制输入+输出）
+拷贝源文件source到target
+public long copyFile(File source, File target){
+    long length = 0;
+    if(source.exists()){
+        InputStream in = null;
+        OutputStream out = null;
+        BufferedInputStream bin = null;
+        BufferedOutputStream bout = null;
+        
+        try{
+            in =  new FileInputStream(source);
+            out = new FileOutputStream(target);
+            bin =  new BufferedInputStream(in);
+            bout = new BufferedOutputStream(out);
+            
+            byte[] bys = new byte[1024*10]; //缓冲区
+            int count = 0;
+            
+            while((count = bin.read(bys, 0, bys.length)) != -1){
+                bout.write(bys, 0, count); //循环写入文件
+                length += count;
+            }
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            bout.close();
+            out.close();
+            bin.close();
+            in.close();
+            
+        }
+    }
+    retrun length;
+}
+
+
+字符输出流
+public void write(int b)throws IOException 
+public void write(chars[] b)throws IOException
+public void write(chars[] b, int off, int len)throws IOException
+public void write(String[] str)throws IOException
+public void close()throws IOException
+
+public long copyTextFile(File source, File target){
+    long length = 0;
+    String parent = ""; //父目录
+    String name = target.getName(); //获取文件名
+    if(!target.exist()){
+        parent = target.getParent(); //获取父目录
+        File dir = new File(parent);//建立父目录文件对象
+        dir.mkdirs(); //建立硬盘上的文件目录
+        target = new File(dir + "/" + name);
+        System.out.println("文件绝对路径名称" + target.getAbsolutePath());
+    }
+    if(source.exists()){
+        Reader r = null;
+        BufferedReader br = null;
+        Writer w = null;
+        BufferedWriter bw = null;
+        
+        try{
+            r =  new FileReader(source);
+            br = new BufferedReader(r);
+            w =  new FileWriter(target);
+            bw = new BufferedWriter(w);
+            
+            char[] chs = new char[1024]; //缓冲区
+            int count = 0;
+            
+            while((count = bin.read(chs, 0, chs.length)) != -1){
+                bw.write(chs, 0, count); //循环写入文件
+                length += count;
+            }
+            
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            bw.close();
+            w.close();
+            br.close();
+            r.close();
+            
+        }
+    }
+    retrun length;
+}
+
+
+小结
+1. File是唯一表示硬盘文件或者目录的类型，通过方法判断目录File对象是文件还是目录
+2. 文件的读写操作
+流的分类： 按照方向 输入（读取）和输出（写入）
+按照处理数据方式：字节流和字符流
+按照流的功能：基于目标文件建立的普通节点流和基于某个节点流建立的处理
+
+读写文件过程：
+    1.建立目标文件
+    2.基于目标文件建立文件流
+    3.进行读写操作
+    4.关闭相关文件流对象，释放资源（要注意异常处理）
+    
+
+
+对象序列化
+在Java应用程序中用户创建N个User对象，尝试编写一个功能方法将这些User对象以在JVM中原有类型方式写入到目标文件中，文件以user.ser后缀名进行保存；
+编写一个功能方法对user.ser进行反序列读取并在程序中以Java对象方式缓存这些对象到集合中
+
+
+实现Serializable接口的类就是序列化类，此类建立的对象就是序列化对象
+public class User implements Serializable{
+    
+} 
+
+public static void serializableJavaObject(List<User> user, File target){
+    if(use.size() != 0){
+        OutputStream out = null;
+        ObjectOutputStream oos = null; //序列化输出流
+        
+        try{
+            out = new FileOutputStream(target); //底层流
+            oos = new ObjectOutputStream(out); //建立序列化输出流
+            
+            for(int i = 0; i < user.size(); ++i){ //循环处理序列化对象到文件中
+                oos.writeObject(user.get(i)); //写入到目标文件
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally{
+            oos.close();
+        }
+    }
+}
+
+反序列化操作，读取目标file中的对象
+public static List<User> deserReader(File){
+    List<User> list = new ArrayList<>();
+    
+    if(file.exists()){
+        InputStream in = null;
+        ObjectInputStream ois = null;
+        
+        try{
+            in = new FileInputStream(file);
+            ois = new ObjectInputStream(in);
+            Object temp = null;
+            while((temp = ois.readObject()) != null){
+                if(temp instanceof User){
+                    User u = (User) temp;
+                    list.add(u); //转换为实际类型
+                    }
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }finally
+        
+    }
+    
+    return list;
+}
