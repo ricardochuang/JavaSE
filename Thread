@@ -1,0 +1,69 @@
+Thread调用start启动运行一个线程，run方法是线程启动后自动执行的业务方法
+
+/**
+两个死循环，第二个始终不能运行
+*/
+public static void main(String[] args){
+
+  while(1==1){
+    System.out.println("Hello!");
+  }
+  
+  while(1==1){
+    System.out.println("Hi!");
+  }
+  
+}
+
+public class ThreadOne extends Thread{
+  @Override
+  public void run(){
+    while(1==1){
+      System.out.println("Hi!");
+      Thread.sleep(1000);
+    }
+ 
+}
+
+public class ThreadTwo extends Thread{
+  @Override
+  public void run(){
+    while(1==1){
+    System.out.println("Hello!");
+    Thread.sleep(1000);
+  }
+}
+
+public static void main(String[] args){
+  ThreadOne one = new ThreadOne();
+  ThreadTwo two = new ThreadTwo();
+  two.start(); //调用start方法，启用线程从而自动执行run方法
+  one.start(); //调用start方法，启用线程从而自动执行run方法
+}
+
+常用构造器
+public Thread() //构造默认名称普通用户线程
+public Thread(Runnable target) //构建依赖于Runnable接口实例的普通用户线程
+public Thread(Runnable target, String name) //构建依赖于Runnable接口实例的普通用户线程并设置线程名称
+
+
+实现runnable的自定义类
+public class MyRunnable implements Runnable{
+  @Override
+  public void run(){
+    
+  }
+}
+
+public class Test2{
+  public static void main(String[] args){
+    /*使用同一个Runnable实现对象构建Thread线程对象*/
+    MyRunnable runnable = new MyRunnable();
+    
+    Thread th0 = new Thread(runnable, "0");
+    Thread th1 = new Thread(runnable, "1");
+    }
+}
+
+
+
