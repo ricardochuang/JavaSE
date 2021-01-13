@@ -51,7 +51,8 @@ public Thread(Runnable target, String name) //构建依赖于Runnable接口实�
 public class MyRunnable implements Runnable{
   @Override
   public void run(){
-    
+    Thread current = Thread.currentThread();
+    System.out.println("当前线程的名称是" + current.getName());
   }
 }
 
@@ -62,6 +63,10 @@ public class Test2{
     
     Thread th0 = new Thread(runnable, "0");
     Thread th1 = new Thread(runnable, "1");
+    
+    th0.strat();
+    th1.strat();
+    
     }
 }
 
