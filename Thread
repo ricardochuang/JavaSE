@@ -70,5 +70,83 @@ public class Test2{
     }
 }
 
+线程优先级
+static int MAX_PRIORITY[10]
+static int MIN_PRIORITY[1]
+static int NORMAL_PRIORITY[5]
 
+th0.setPriority(Thread.MAX_PRIORITY);
+
+
+用多线程计算累加和
+public class ComputingCenter implements Runnable{
+
+    private long sum1 = 0;
+    private long sum2 = 0;
+    private long target;
+  
+  @Override
+  public void run(){
+    long limit = target/2; //分界线
+    
+    if(Thread.currentThread().getName().euqals("count1"){ //判断一下是否为第一个线程，即想要计算前一半累加
+      for(long i = 0; i <= limit; i++){
+        sum1 += i;
+      }
+    }
+    
+    if(Thread.currentThread().getName().euqals("count2"){ //判断一下是否为第一个线程，即想要计算前一半累加
+      for(long i = limit + 1; i <= target; i++){
+        sum2 += i;
+      }
+    }
+  }
+  
+  public long getSum1(){
+    return sum1;
+  }
+   
+  public long setSum1(long sum1){
+    this.sum1 = sum1;
+  }
+  
+  public long getSum2(){
+    return sum2;
+  }
+   
+  public long setSum2(long sum2){
+    this.sum2 = sum2;
+  }
+  
+   public long setTarget(long target){
+    this.target = target;
+  }
+  
+}
+
+
+
+public class TestThread{
+  public static void main(String[] args){
+    testComCenter();
+  }
+  
+  private static void testComCenter(){
+    ComputerCenter center = new ComputerCenter();
+    center.setTarget(10000000);
+    Thread th1 = new Thread(center, "count1");
+    Thread th2 = new Thread(center, "count2");
+    th1.start();
+    th2.start();
+    
+    long sum = 0;
+    while(1 == 1){
+      if(th1.getState() == Thread.State.TERMINATED && th2.getState() == Thread.State.TERMINATED){
+        sum = center.getSum0() + center.getSum2();
+        break;
+      }
+    }
+    
+  }
+}
 
