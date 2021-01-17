@@ -150,3 +150,53 @@ public class TestThread{
   }
 }
 
+
+线程的阻塞和处理
+public static native void sleep(long millis) throws InterruptedException //设置当前线程休眠方法
+public static native Thread currentThread() //获得当前正在执行的线程
+
+
+public class LandlordAndFarmerRunnable implements Runnable{
+  private Thread landlord;
+  private Thread farmer;
+  private List<Integer> list = new ArrayList<>;
+  
+  @Override
+  public void run(){
+    
+    if(Thread.currentThread() == farmer){
+      for(int i =0; i < 1000; i++){
+        Random random = new Random();
+        list.add(new Interger(random.nextInt(1000)));
+        try{
+        if(list.size == 100 || list.size == 500 || list.size == 800)
+            Thread.sleep(1000*60*3); 
+        } catch (InterruptedException e){
+          System.out.println("被叫醒");
+          e.printStackTrace();
+        }
+      }
+    }
+    
+    if(Thread.currentThread() == landlord){
+        while(1 == 1){
+          if(list.size() == 1000) break;
+          if(farmer.getState() == Thread.State.TIMED_WAITING){ //发现农民要休息
+              System.out.println("叫醒");
+              farmer.interrupt(); //调用线程的中断方法
+          }
+            
+        }
+    }
+    
+    
+    System.out.println("全部工作量" + list.size());
+    for(Integer num : list){
+        System.out.println(num);
+    }
+  }
+}
+
+
+
+
