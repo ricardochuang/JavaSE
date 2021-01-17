@@ -199,4 +199,11 @@ public class LandlordAndFarmerRunnable implements Runnable{
 
 
 线程联合
+public final void join() throws InterruptedException //无限期等待当前线程执行结束
+public final void join(long millis) throws InterruptedException //在millis毫秒内等待当前线程执行结束
+public final void join(long mil, int nano) throws InterruptedException //在millis毫秒和nano纳秒内等待当前线程执行结束
+
+
+public class ThreadJoinRunnable implements Runnable
+
 
