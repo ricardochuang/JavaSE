@@ -294,7 +294,7 @@ synchronized(list){
     list.add(i);
 }
 
-同步
+同步代码块
 public class SynchronizedRunnable implements Runnable{
     private List<String> list = new ArrayList
 
@@ -430,4 +430,46 @@ public class TestSyncThis{
         dao.deleteData();
     }
 }
+
+
+同步方法
+public SyncMethodRunnable implements Runnable{
+
+    private List<Integer> list = new ArrayList<>();
+    
+    @Override
+    public void run(){
+        addData4(); //非同步方法
+        addData1();
+        addData2();
+        addData3();
+        
+    }
+    
+    public synchronized void addData1(){
+        for(int i = 10; i < 100; ++i){
+            list.add(i);
+        }
+    }
+    public synchronized void addData2(){
+       for(int i = 10; i < 100; ++i){
+            list.add(i);
+        }   
+    }
+    public synchronized void addData3(){
+        for(int i = 10; i < 100; ++i){
+            list.add(i);
+        }
+    }
+    public void addData4(){
+        for(int i = 10; i < 100; ++i){
+            list.add(i);
+        }  
+    }
+}
+
+
+//最终的结果是对于非同步的方法，大家都可以执行，对于同步方法，一旦有一个开始执行，其他的必须等待
+
+
 
