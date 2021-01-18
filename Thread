@@ -204,6 +204,97 @@ public final void join(long millis) throws InterruptedException //在millis毫�
 public final void join(long mil, int nano) throws InterruptedException //在millis毫秒和nano纳秒内等待当前线程执行结束
 
 
-public class ThreadJoinRunnable implements Runnable
+public class ThreadJoinRunnable implements Runnable{
+    @Override
+    public void run(){
+        if(Thread.currentThread().getName().equals("leader")){
+            for(int i = 1; i < 1000000000; ++i){
+                if( i % 1000000 == 0){
+                    System.out.println("领导正在通过");
+                }
+            }
+        }
+    }
+
+}
+
+private static void testThreadJoin(){
+    ThreadJoinRunnable tjr = new ThreadJoinRunnable();
+    Thread leader = new Thread(tjr, "leader");
+    Thread norm1 = new Thread(tjr, "norm1");
+    Thread norm2 = new Thread(tjr, "norm2");
+    
+    leader.start();
+    leader.join();
+    norm1.start();
+    norm2.start();
+    
+}
+
+
+多线程数据安全访问
+private class SyncDataSupport{
+    private List<Integer> list = new ArrayList<>();
+    private Vector<Integer> vector = new Vector<>();
+    
+    public void addData(){
+        for(int i = 0; i < 10000; ++i){
+            list.add(i); //索引错乱，线程不安全
+            vector.add(i); //不报错，线程安全
+        }
+    }
+}
+
+public class ThreadLeft extends Thread{
+    
+    private SyncDataSupport syn;
+    
+    @Override
+    public void run(){
+        syn.addData();
+    }
+    
+    public void setSyn(SynDataSupport syn){
+        this.syn = syn;
+    }
+}
+
+
+public class ThreadRight extends Thread{
+    
+    private SyncDataSupport syn;
+    
+    @Override
+    public void run(){
+        syn.addData();
+    }
+    
+    public void setSyn(SynDataSupport syn){
+        this.syn = syn;
+    }
+}
+
+
+public static void main(String[] args){
+    SynDataSupport sds = new SynDataSupport();
+    ThreadLeft left = new ThreadLeft();
+    left.setName("left");
+    left.setSyn(sds);
+    
+    ThreadRight right = new ThreadRight();
+    right.setName("right");
+    right.setSyn(sds);
+    
+    left.start();
+    right.start(); 
+}
+
+同步代码块
+synchronized(list){
+    list.add(i);
+}
+
+同步
+
 
 
