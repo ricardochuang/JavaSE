@@ -295,6 +295,139 @@ synchronized(list){
 }
 
 同步
+public class SynchronizedRunnable implements Runnable{
+    private List<String> list = new ArrayList
+
+    @Override
+    public void run(){
+        synchronized(list){
+            for(int i = 0; i < 100; ++i){
+                list.add(i);
+                System.out.println("当前持有监视器的线程对象" + Thread.currentThread.getName());
+                Thread.sleep(1000);
+            }
+        }
+        System.out.println("当前线程对象" + Thread.currentThread.getName());
+    }
+    
+    public List<String> getList(){
+        return list;
+    }
+    public void setList(List<String> list){
+        this.list = list;
+    }
+}
+
+public class TestSynchronized {
+    public static void main(String[] args){
+      testSynCode();
+    }
+    
+    private static void testSynCode{
+      SynchronizedRunnable sr = new SynchronizedRunnable();
+      Thread t1 = new Thread(sr, "A");
+      Thread t2 = new Thread(sr, "B");
+      t1.setPriority(Thread.MAX_PRIORITY);
+      t1.start();
+      t2.start();
+    }
+}
+
+//A会独享，B一直等待
 
 
+
+重入
+synchronized(list){
+            for(int i = 0; i < 100; ++i){
+                list.add(i);
+                System.out.println("当前持有监视器的线程对象" + Thread.currentThread.getName());
+                if(i == 20) {delete();}
+                Thread.sleep(100);
+            }
+        }
+        
+public synchronized void delete(){
+    for(int i = 0; i < list.size(); ++i){
+        System.out.println("Deleting......");
+    }
+}
+
+同步安全this对象同步
+public class CommDao{
+  List<Integer> list;
+  
+  public void addData{
+      synchronized(this){
+        for(int i = 0; i < 50; ++i){
+          list.add(new Integer(i));
+          Thread.sleep(100);
+        }
+      }
+  }
+  
+  public synchronized void deleteData(){
+      for(int i = 0; i < list.size(); i++){
+          list.remove(i);
+          System.out.println("Deleting......");
+      }
+  }
+ 
+}
+
+public class ThreadOK extends Thread{
+
+    private CommDao dao;
+    @Override
+    public void run(){
+        dao.addData();
+    }
+    
+    public ThreadOK(CommDao dao){
+        this.dao = dao;
+    }
+    
+    public ThreadOK(){
+    
+    }
+    
+   
+}
+
+public class ThreadNOT extends Thread{
+
+    private CommDao dao;
+    @Override
+    public void run(){
+        dao.addData();
+    }
+    
+    public ThreadNOT(CommDao dao){
+        this.dao = dao;
+    }
+    
+    public ThreadNOT(){
+    
+    }
+    
+}
+
+
+public class TestSyncThis{
+    public static void main(String[] args){
+        CommDao dao = new CommDao();
+        List<Integer> list = new ArrayList<>();
+        for(int i = 100; i < 5000; i = i + 100){
+            list.add(i);
+        }
+        
+        ThreadOK ok = new ThreadOK(dao);
+        
+        ThreadNOT not = new ThreadNOT(dao);
+        
+        ok.start(); //ok先执行，其他必须等待，因为this锁定
+        not.start();
+        dao.deleteData();
+    }
+}
 
