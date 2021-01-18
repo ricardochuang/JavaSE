@@ -473,3 +473,19 @@ public SyncMethodRunnable implements Runnable{
 
 
 
+
+
+线程等待与唤醒
+public final void wait() throws InterruptedException
+public final void wait(long mil) throws InterruptedException
+public final void wait(long mil) throws InterruptedException
+
+
+
+
+
+
+
+
+
+
