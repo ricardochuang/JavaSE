@@ -480,6 +480,34 @@ public final void wait() throws InterruptedException
 public final void wait(long mil) throws InterruptedException
 public final void wait(long mil) throws InterruptedException
 
+public class ThreadWaitAndNotify implements Runnalbe{
+
+    private List<Integer> list = new ArrayList<>();
+    
+    @Override
+    public void run(){
+        synchronized(list){
+            for(int i = 1; i < 100; ++i){
+                if(i == 20 && Thread.currentThread().getName().equals("A")){ //满足条件当前线程进行等待（在监视器等待，未离开监视器，可以被其他拥有监视器所有权的线程使用notify方法唤醒）
+                    list.wait(); //使用被监视的对象调用，导致当前线程在监视器上等待
+                }
+            }
+        }
+        
+        if(Thread.currentThread().getName().equals("B")){
+            list.notify(); //随机唤醒任意一个在对象监视器上等待的线程对象
+        }
+        
+    }
+
+}
+
+
+
+死锁的产生和释放
+
+两个线程在互相等待，JVM不能主动释放
+
 
 
 
