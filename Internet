@@ -1,0 +1,81 @@
+URL
+public URL(String spec) throws MalformedURLException
+public URL(URL context, String spec) throws MalformedURLException
+public URL(String protocol, String host, String file) throws MalformedURLException
+public URL(String protocol, String host, int port, String file) throws MalformedURLException
+
+public class Test{
+    public static void main(String[] args) throws IOException{
+        URL url = new URL("http", "12.0.0.1", 5505, "/index.html");
+        url.toString();
+    }
+}
+
+
+SocketAddress
+public InetSocketAddress(InetAddress addr, int port) //根据ip地址和端口号创建套接字port 0到65535
+public InetSocketAddress(int port) //根据通配符（本地0.0.0.0）和端口号创建套接字
+public InetSocketAddress(String host, int port) //根据给定的host主机名和端口号创建套接字，参数host主机如果存在安全验证（访问证书）将抛出SecurityExceotion 
+
+public class ServerSystem{
+    private InetAddress localhostIP; //本地将要绑定到ServerSocket套接字的辅助组件
+    
+    private void initInetAddress(){
+        if(localhostIP == null){
+            localhostIP = Inet4Address.getLocalHost();
+        }
+    }
+    
+    private void init(){
+        initInetAddress();
+    }
+    
+    public ServerSystem(){
+        init();
+    }
+}
+
+
+ServerSocket
+public ServerSocket() throws IOException //创建非绑定服务器套接字
+public ServerSocket(int port)  //创建绑定到特定端口的服务器套接字
+public ServerSocket(int port, int backlog) //指定端口号和队列长度
+public ServerSocket(int port, int backlog, InetAddress bindAddr) //指定端口号队列长度及指定主机地址创建套接字
+
+public Socket accept() throws IOException //侦听并接受到此套接字的连接，未连接前处于阻塞状态
+void close() //关闭此套接字
+public void setSoTimeout(int timeout) //以毫秒为单位设置超时时间，如果为0则永不超时
+public boolean isBound() //测试ServerSocket是否绑定
+public boolean isClosed() //测试ServerSocket是否关闭
+public InetAddress getInetAddress() //返回此服务器套接字的本地地址
+
+
+
+private ServerSocket serverSocket;
+
+private static final int PORT = 9090;
+
+private static final int MAX_BACL_LOG = 20;
+
+private void initServerSocket(){
+    if(serverSocket == null){
+        serverSocket = new ServerSocket(PORT, MAX_BACL_LOG, localhostIP);
+    }
+}
+
+
+private static final int PORT_SPARE = 9999;
+
+private void starAccepts(){
+    if(!serverSocket.isBound()){
+        serverSocket.bind(new InetSocketAddress(PORT_SPARE), MAX_BACL_LOG);
+    }
+    Socket clientSocket = serverSocket.accept(); //等待客户端连接进来，此方法是阻塞（没有连接时处于阻塞）
+}
+
+
+
+
+
+
+
