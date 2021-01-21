@@ -182,7 +182,52 @@ public class ClientSystem{
 
 
 
+UDP
+构建DatagramPacket 
+public DatagramPacket(byte[] buf, int len)
+public DatagramPacket(byte[] buf, int offset, int len)
 
+public DatagramPacket(byte[] buf, int len, InetAddress add, int port)
+public DatagramPacket(byte[] buf, int len, SocketAddress add)
+public DatagramPacket(byte[] buf, int len, int offset, SocketAddress add)
+
+public void setData(byte[] buf) //设置数据缓冲区
+public byte[] getData() //获取数据包缓冲区
+public void setSocketAddress(SocketAddress address)
+public void SocketAddress getSocketAddress(SocketAddress address)
+public void setLength(int length) //设置数据包缓冲区长度
+public int length() //返回将要发送或者收到的数据的长度
+
+DatagramSocket构造器
+public DatagramSocket() throws SocketException //构造数据报套接字并将其绑定到任何可用端口
+public DatagramSocket(int port) throws SocketException //构造数据报套接字并将其绑定到指定用端口
+public DatagramSocket(int port, InetAddress add) throws SocketException //构造数据报套接字并将其绑定到指定的本地地址
+public DatagramSocket(SockertAddress add) throws SocketException //构造数据报套接字并将其绑定指定的本地套接字地址
+
+
+
+public class ClientStart
+    public static void main(String[] args){
+        
+}
+
+使用UDP协议收发
+public class UdpClientSocket{
+    
+    private SocketAddress remoteAddress; //远程目标主键地址
+    private static final int LOCAL_PORT = 6666; //本地端口
+    
+    private DatagramPacket initDataGram(byte[]){ //构建数据报包
+        DatagramPacket packet = null;
+        packet = new DatagramPacket(buf, buf.length);
+        packet.setSocketAddress(address);
+        return packet; //返回数据包对象
+    }
+    
+    private DatagramSocket initDatagramSocket(){
+            return new DatagramSocket(LOCAL_PORT);
+    }
+}
 
 
 
