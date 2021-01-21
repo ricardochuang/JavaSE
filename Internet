@@ -213,6 +213,9 @@ public void close() //关闭数据包套接字
 
 
 
+
+
+
 public class ClientStart
     public static void main(String[] args){
         
@@ -221,10 +224,13 @@ public class ClientStart
 使用UDP协议收发
 public class UdpClientSocket{
     
+    private SocketAddress localAddress; //本地主机地址
     private SocketAddress remoteAddress; //远程目标主键地址
-    private static final int LOCAL_PORT = 6666; //本地端口
+    private static final int LOCAL_PORT = 6666; //本地主机端口
+    private static final int REMOTE_PORT = 7777; //远程主机端口
+    private final String HOST_NAME = "localhost";
     
-    private DatagramPacket initDataGram(byte[]){ //构建数据报包
+    private DatagramPacket initDataGram(byte[] buf){ //构建数据报包
         DatagramPacket packet = null;
         packet = new DatagramPacket(buf, buf.length);
         packet.setSocketAddress(address);
@@ -234,6 +240,51 @@ public class UdpClientSocket{
     private DatagramSocket initDatagramSocket(){
             return new DatagramSocket(LOCAL_PORT);
     }
+    
+    //构建绑定到套接字的本地主机地址
+    private void initLocalAddress(){
+            if(localAddress == null){
+                localAddress = new InetSocketAddress(HOST_NAME, LOCAL_PORT);
+            }
+    }
+    
+    //构建远程主机地址
+    private void initRemoteAddress(){
+        if(remoteAddress == null){
+            remoteAddress = new InetSocketAddress(HOST_NAME, REMOTE_PORT);
+        }
+    }
+    
+    private void connectRemoteHost(DatagramSocket socket){
+        socket.connect(remoteAddress); //尝试建立远程连接
+    }
+    
+    //核心业务方法：实现信息的交互
+    public void udpSocketSendAndReceiveMessage(){
+            Scanner scan = new Scanner(System.in);
+            System.out.println("请输入数据");
+            String message = scan.next();
+            byte [] buf = message.getBytes();  //用户构建数据
+            DatagramPacket tempDP = initDataGram(buf);  //调用构建数据报包的方法
+            DatagramSocket tempScoket = initDatagramSocket();  //获取udp套接字对象
+            connectRemoteHost(tempScoket);  // 连接远程主机
+            tempScoket.send(tempDP);  //发送数据
+            byte[] returnBuf = new byte[1024];
+            DatagramPacket returnDatagram = new DatagramPacket(returnBuf, returnBuf.length);
+            tempScoket.receive(returnDatagram);  //接收数据并处理
+             
+            int len = returnDatagram.getLength();
+            int offset = returnDatagram.getOffset();
+            byte[] data = returnDatagram.getData();
+            String returnMess = new String(data, offset, data.length);
+            System.out.println("服务器回复" + returnMessage);
+    }
+    
+    public UdpClientScoket(){
+            initLocalAddress();  //构建本机地址
+            initRemoteAddress();  //构建远程本机地址
+    }
+    
 }
 
 
