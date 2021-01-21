@@ -81,5 +81,108 @@ output = client.getOutputStream();
 dataOutput = new DataOutputStream(output);
 
 
+Socket
+public Socket() //创建未绑定和连接的套接字
+public Socket(InetAddress, addr, int port) //创建并绑定到addr映射的IP地址和port指定的端口号
+public Socket(String host, int port) //创建并绑定到host映射的IP地址和port指定的端口号
+public Socket(InetAddress remoteAdd, int remotePort, InetAddress localAdd, int localPort) //创建连接到远处服务器的套接字
+
+void bind(SocketAddress bindpoint) //将套接字绑定到本地地址
+void close() //关闭此套接字
+void connect(SocketAddress endpoint) //将此套接字连接到服务器
+void connect(SocketAddress endpoint, int timeout) //指定超时时间
+InputStream getInputStream() //返回此套接字的输入流
+OutputStream getOutputStream() //返回此套接字的输出流
+
+
+
+实现客户端套接字与服务器交互的过程
+1. 创建欲绑定的本机地址与端口号以及远程服务器套接字地址与端口号
+2. 创建套接字对象并绑定本机地址及端口号
+3. 尝试连接目标远程服务器
+4. 创建基于套接字的输入输出流
+5. 实现信息交互
+
+public class ClientSystem{
+        private InetAddress localAddress; //本地主机地址
+        private InetAddress remoteAddress; //远程套接字服务器地址
+        
+        private static final int LOCAL_PORT = 7575; //本地绑定的端口号
+        private static final int REMOTE_LOCAL_PORT = 9090; /远程绑定的端口号
+        
+        
+        private Socket client; //客户端套接字对象
+        
+        //输入输出流
+        private InputStream in;
+        private OutputStream out;
+        private DataInputStream din;
+        private DataOutnputStream dout;
+        
+        
+        private void initClientSocket(){
+                if(client == null){
+                        client = new Socket(); //构建未绑定的客户端套接字
+                }
+        }
+        
+        private void initLocalAddress(){
+              if(localAddress == null){
+                    localAddress = new InetSocketAddress("192.168.0.106", LOCAL_PORT); //构建本地地址
+              }  
+        }
+   
+        //构建远程服务器套接字地址
+        private void initRemoteAddress(){
+              if(remoteAddress == null){
+                    remoteAddress = new InetSocketAddress("192.168.0.106", REMOTE_LOCAL_PORT); //构建本地地址
+              }  
+        } 
+   //将套接字绑定到主机地址
+    private void bundAddress(){
+            client.bind(localAddress);
+    }
+    
+    //请求连接到远程服务器
+    private void connectRemoteServer(){
+            client.connect(remoteAddress);
+    }
+    
+    public void createSocketInputAndOutput(){
+            if(client.isConnected()){
+                    in = client.getInputStream();
+                    out = client.getOutputStream();
+                    din = new DataInputStream(in);
+                    dout = new DataInputStream(out);
+            }
+    }
+    
+    //实现与服务器进行信息交互的方法
+    public void sendAndReceive(){
+            connectRemoteServer(); //调用连接服务器的方法
+            createSocketInputAndOutput(); //调用创建文件流的方法
+            Scanner scan = new Scanner(System.in);
+            
+            while(1 == 1){
+                System.out.println("输入信息，回车发送");
+                String mess = scan.next();
+                dout.writeUTF(mess); //发送信息给服务器
+                String backMess = din.readUTF(); //读取服务器信息
+            }
+    }
+    
+    public ClientSystem(){
+            initLocalAddress(); //调用创建ip地址方法
+            initClientSocket(); //调用套接字创建方法
+            initRemoteAddress(); //创建远程主机地址
+            bundAddress(); //调用绑定方法
+    }
+
+}
+
+
+
+
+
 
 
