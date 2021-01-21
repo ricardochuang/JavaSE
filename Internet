@@ -204,6 +204,13 @@ public DatagramSocket(int port) throws SocketException //构造数据报套接�
 public DatagramSocket(int port, InetAddress add) throws SocketException //构造数据报套接字并将其绑定到指定的本地地址
 public DatagramSocket(SockertAddress add) throws SocketException //构造数据报套接字并将其绑定指定的本地套接字地址
 
+public void bind(SocketAddress addr) throws SocketException
+public void connect(SocketAddress add) throws SocketException
+public void send(DatagramPacket) //发送数据包
+public void receive(DatagramPacket p) //接受数据包
+public void disconnect() //断开套接字连接
+public void close() //关闭数据包套接字
+
 
 
 public class ClientStart
