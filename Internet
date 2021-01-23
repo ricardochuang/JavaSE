@@ -218,7 +218,8 @@ public void close() //关闭数据包套接字
 
 public class ClientStart
     public static void main(String[] args){
-        
+        UdpClientSocket client = new UdpClientSocket();
+        client.udpSocketSendAndReceiveData();
 }
 
 使用UDP协议收发
@@ -262,12 +263,17 @@ public class UdpClientSocket{
     //核心业务方法：实现信息的交互
     public void udpSocketSendAndReceiveMessage(){
             Scanner scan = new Scanner(System.in);
-            System.out.println("请输入数据");
-            String message = scan.next();
-            byte [] buf = message.getBytes();  //用户构建数据
-            DatagramPacket tempDP = initDataGram(buf);  //调用构建数据报包的方法
             DatagramSocket tempScoket = initDatagramSocket();  //获取udp套接字对象
             connectRemoteHost(tempScoket);  // 连接远程主机
+            
+            while( 1 ==1 ){
+                System.out.println("请输入数据");
+                String message = scan.next();
+                byte [] buf = message.getBytes();  //用户构建数据
+                DatagramPacket tempDP = initDataGram(buf);  //调用构建数据报包的方法
+            }
+
+
             tempScoket.send(tempDP);  //发送数据
             byte[] returnBuf = new byte[1024];
             DatagramPacket returnDatagram = new DatagramPacket(returnBuf, returnBuf.length);
@@ -287,5 +293,63 @@ public class UdpClientSocket{
     
 }
 
+
+
+UdpSocketServer
+
+public class ServerStart{
+        public static void main(String[] agrs){
+            updSocketServer server = new UdpSocketServer();
+            client.udpSocketSendAndReceiveData();
+        }
+}
+
+
+public class UdpScoketServer{
+    private static final String LOCAL_HOST = "localhost";
+    private static final int PORT = 7777;
+    private DatagramSocket serverSocket;
+    
+    //基于UDP协议的数据库信息收发核心方法
+    public void udpSocketSendAndReceive(){
+        instanceDatagramSocket();  //调用构建套接字的方法
+        while(1 ==1){
+        DatagramPacket receiveDP = initDatagramPacket();
+        serverSocket.receive(receiveDP); //接受用户数据报包
+        String packetMess = new String(receiveDP.getData());
+        System.out.println("用户数据报信息：" + packetMess);
+        System.out.println("请回复用户：");
+        String resMess = scan.next();
+        byte [] buf = resMess.getBytes();
+        
+        DatagramPacket sendData = new DatagramPacket(buf, buf.length);
+        sendData.setAddress(InetAddress.getByName(LOCAL_HOST));
+        sendData.setPort(6666); //设置端口号
+        
+        //  sendData.setAddress(receiveDP.getAddress());
+        //  sendData.setPort(receiveDP.getPort());
+        
+        serverSocket.send(sendData);
+        }
+
+    }
+    
+    //构建服务器udp套接字
+    private void instanceDatagramSocket(){
+        if(serverSocket == null){
+              serverSocket = new DatagramSocket(PORT);
+              
+        }
+    }
+    
+    //构建接受用户发送的数据报包
+    private DatagramPacket initDatagramPacket(){
+        DatagramPacket packet = null;
+        byte[] buf = new byte[1024];
+        packet = new DatagramPacket(buf, buf.length);
+        return packet;
+    }
+    
+}
 
 
